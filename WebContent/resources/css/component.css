@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+/* generic parts */
+h1 {
+font-size:200%;
+}
+
+#content h2 {
+font-size:130%;
+}
+
+#outline h2,
+h3 {
+font-size:120%;
+}
+
+h4 {
+font-size:100%;
+}
+
+/* #outline */
+#outline dl dt {
+margin-left:8px;
+padding-left:16px;
+}
+
+#outline dl dd {
+margin-left:24px;
+}
+
+/* #content */
+#content p,
+#content table {
+margin-left:12px;
+}
+
+#content table tr th,
+#content table tr td {
+border-color:#999;
+text-align:center;
+}
+
+#content table tr th {
+background:#ccc;
+}
+
+#content table tr.even td {
+background:#eee;
+}
+
+#content fieldset div {
+height:30px;
+}
+
+
+/* --CUSTOM-- */
+
+#wrapper {
+margin-left:30px;
+width:780px;
+}
+
+label {
+display:block;
+}
+
+form div {
+margin-bottom:.5em;
+}
+
+#message {
+background:#fcc;
+padding:1em;
+margin-bottom:1em;
+}
+
+#footer {
+margin-top:40px;
+}

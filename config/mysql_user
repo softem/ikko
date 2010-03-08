@@ -1,0 +1,2 @@
+GLANT ALL ON *.* TO softem@"localhost"IDENTIFIED BY "softem";
+FLUSH PRIVILEGES;

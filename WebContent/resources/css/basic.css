@@ -1,0 +1,225 @@
+@charset "utf-8";
+
+/*
+---------------------------------------------------------------------
+	basic.css ver 1.0 [2008/7/2] 
+	*This document validates as CSS level 3
+	*GNU General Public License v3
+	*http://higash.net/20080702/reset_css2.html
+
+	Modify YUI Base CSS
+	*Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+	*http://developer.yahoo.com/yui/license.html
+	
+	Modify Formy CSS Form Framework 0.8(beta)
+	*GNU General Public License v2
+	*http://code.google.com/p/formy-css-framework/
+---------------------------------------------------------------------
+*/
+
+/* --A-- */
+a {
+cursor:pointer;
+text-decoration:none;
+}
+
+a:hover {
+text-decoration:underline;
+}
+
+/* --FORM-- */
+fieldset {
+border:1px solid #ccc;
+margin-bottom:1em;
+padding:0 1em 1em 1em;
+}
+
+legend {
+background:#fff;
+padding:0.3em;
+}
+
+input, textarea {
+line-height:1.4;
+padding:0;
+vertical-align:middle;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+vertical-align:text-bottom;
+}
+
+input[type="submit"] {
+padding:0.1em;
+}
+
+select {
+padding:0;
+}
+
+	/* for IE6 */
+	* html input {
+	padding:0.1em;
+	}
+	
+	* html input.checkbox,
+	* html input.radio {
+	vertical-align:-0.3em;
+	}
+
+	* html input.submit {
+	line-height:1.2;
+	padding-top:0.2em;
+	}
+	
+	* html select {
+	vertical-align:-0.2em;
+	}
+	
+	/* for IE7 */
+	*+html input {
+	padding:0.1em;
+	}
+	
+	*+html input.submit {
+	line-height:1.2;
+	padding-top:0.2em;
+	}
+	
+	*+html select {
+	vertical-align:-0.2em;
+	}
+
+	/* for Opera9.27 */
+	html:first-child input {
+	padding:0.1em;
+	}
+	
+	html:first-child input[type="checkbox"],
+	html:first-child input[type="radio"] {
+	vertical-align:middle;
+	}
+
+	html:first-child input[type="submit"] {
+	padding:0.3em;
+	}
+	
+	html:first-child select {
+	padding:0.2em;
+	}
+
+	/* for Opera9.5 [Safari3] */
+	body:first-of-type input {
+	padding:0.1em;
+	}
+
+	body:first-of-type input[type="checkbox"],
+	body:first-of-type input[type="radio"] {
+	vertical-align:-0.3em;
+	}
+	
+	body:first-of-type input[type="submit"] {
+	padding:0.3em 0.3em 0.2em 0.3em;
+	}
+
+	/* for Safari3 */
+	html:not(:only-child:only-child) input {
+	padding:0;
+	vertical-align:baseline;
+	}
+	
+	html:not(:only-child:only-child) input[type="checkbox"],
+	html:not(:only-child:only-child) input[type="radio"] {
+	vertical-align:baseline;
+	}
+	
+	html:not(:only-child:only-child) select {
+	vertical-align:0.1em;
+	}
+
+/* --HEADLINE-- */
+h1, h2, h3, h4, h5, h6 {
+font-weight:bold;
+margin:1em 0;
+}
+
+/* --LIST-- */
+ol, ul {
+margin:1em 1em 1em 3em;
+text-align:justify;
+text-justify:inter-ideograph;
+}
+
+dl {
+margin:1em;
+}
+
+ol li {
+list-style:decimal outside;	
+}
+
+ul li {
+list-style:disc outside;
+}
+
+dl dd, ol li, ul li {
+margin-bottom:0.5em;
+}
+
+/* --TABLE-- */
+table {
+margin-bottom:1em;
+}
+
+td, th {
+border:1px solid;
+padding:0.5em;
+}
+
+th {
+font-weight:bold;
+text-align:center;
+}
+
+/* --OTHER TAGS-- */
+abbr, acronym {
+border-bottom:1px dotted;
+cursor:help;
+}
+
+blockquote {
+margin:1em;
+}
+
+caption {
+margin-bottom:0.5em;
+text-align:center;
+}
+
+em, strong {
+font-weight:bold;
+}
+	
+p {
+margin-bottom:1em;
+text-align:justify;
+text-justify:inter-ideograph;
+}
+
+/* clearfix */
+.clearfix:after {
+content:"";
+display:block;
+clear:both;
+}
+
+	/* for IE6 */
+	* html .clearfix {
+	display:inline-block;
+	}
+	
+	/* for IE7 */
+	*+html .clearfix {
+	display:inline-block;
+	}
