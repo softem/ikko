@@ -12,9 +12,6 @@
 <ui:composition template="layout.xhtml">
 
 	<ui:define name="contents">
-		<h:column rendered="#{security.error}">
-			<div id="message"><label jsfc="h:outputText" value="#{security.message}" /></div>
-		</h:column>
 		<form jsfc="h:form">
 			<div><label for="loginId">ログインID</label>
 			<input jsfc="h:inputText" type="text" value="#{security.employee.loginId}" size="20" maxlength="32" /></div>

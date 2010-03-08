@@ -9,20 +9,26 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 <body>
-<ui:composition template="layout.xhtml">
+<ui:composition template="../layout.xhtml">
 
-	<ui:define name="headline">
-	メインメニュー
-	</ui:define>
+	<ui:define name="title">勤怠管理</ui:define>
+	<ui:define name="headline">勤怠一覧</ui:define>
 
 	<ui:define name="contents">
-	<ul>
-		<li><a jsfc="h:link" outcome="report/index">勤怠入力</a></li>
-	</ul>
-	<ul>
-		<li><a jsfc="h:link" outcome="employee/index">社員マスタ</a></li>
-		<li><a jsfc="h:link" outcome="index">ログアウト</a></li>
-	</ul>
+		<table>
+			<thead>
+				<tr>
+					<td>日付</td>
+					<td>プロジェクト</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr jsfc="ui:repeat" value="#{index.list}" var="row">
+					<td><span jsfc="h:outputText" value="#{row.date}" /></td>
+					<td><span jsfc="h:outputText" value="#{row.projectName}" /></td>
+				</tr>
+			</tbody>
+		</table>
 	</ui:define>
 
 </ui:composition>
