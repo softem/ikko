@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xml:lang="ja" lang="ja">
@@ -14,18 +15,73 @@
 	<ui:define name="title">部署管理</ui:define>
 	<ui:define name="headline">部署一覧</ui:define>
 
+	<ui:define name="js">
+	$(function() {
+	});
+
+	var savedId = -1;
+
+	function showForm(id) {
+		savedId = id;
+		$('#f\\:id').val($('#id'+id).html());
+		if (id > 0) {
+			$('#f\\:sectionName').val($('#sectionName'+id).html());
+		}
+		$.blockUI({message: $('#inputForm')});
+		$('#close').click(function() {
+			$.unblockUI();
+			return false;
+		});
+	}
+
+	function onStatusChange(data) {
+		if (data.type == 'event') {
+			if (data.status == 'begin') {
+				$('form :submit').attr('disabled', true);
+			}
+			if (data.status == 'success') {
+				var entity = eval('(' + $('#f\\:response').val() + ')');
+				$('#f\\:response').val('');
+				$('#id' + savedId).text(entity.id);
+				$('#sectionName' + savedId).text(entity.sectionName);
+				$.unblockUI();
+			}
+			if (data.status == 'complete') {
+				$('form :submit').removeAttr('disabled');
+			}
+		}
+	}
+	</ui:define>
+
 	<ui:define name="contents">
+		<p><input type="button" class="editButton" value="新規登録" onclick="showForm(-1)" /></p>
+		<div id="inputForm" style="display:none;">
+			<form jsfc="h:form" id="f" >
+				<div><label for="sectionName">部署名</label>
+				<input jsfc="h:inputText" type="text" id="sectionName" value="#{sectionAction.section.sectionName}" size="32" maxlength="32" /></div>
+				<input jsfc="h:inputHidden" type="hidden" id="id" value="#{sectionAction.section.id}" />
+				<div>
+					<input jsfc="h:commandButton" type="submit" actionListener="#{sectionAction.save}" value="保存">
+						<f:ajax execute="@form" render="response" onevent="onStatusChange" />
+					</input>
+					<input jsfc="h:inputHidden" type="hidden" id="response" value="#{sectionAction.response}"/>
+					<input type="submit" id="close" value="閉じる"/>
+				</div>
+			</form>
+		</div>
 		<table>
 			<thead>
 				<tr>
-					<th>#</th>
+					<th>ID</th>
 					<th>部署名</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr jsfc="ui:repeat" value="#{sectionAction.sectionList}" var="row">
-					<td><span jsfc="h:outputText" value="#{row.id}" /></td>
-					<td><span jsfc="h:outputText" value="#{row.sectionName}" /></td>
+					<td id="id#{row.id}"><span jsfc="h:outputText" value="#{row.id}" /></td>
+					<td id="sectionName#{row.id}"><span jsfc="h:outputText" value="#{row.sectionName}" /></td>
+					<td><input type="button" class="editButton" value="編集" onclick="showForm(#{row.id})" /></td>
 				</tr>
 			</tbody>
 		</table>

@@ -84,3 +84,8 @@ margin-bottom:1em;
 #footer {
 margin-top:40px;
 }
+
+form {
+padding:1em;
+text-align:left;
+}
