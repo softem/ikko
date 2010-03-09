@@ -19,7 +19,7 @@ public class TimeLogInterceptor {
 			long start = System.nanoTime();
 			result = ic.proceed();
 			long end = System.nanoTime();
-			System.out.println(String.format("時間%,d ns", end - start));
+			System.out.println(String.format("%,d ns", end - start));
 			return result;
 		} catch (Exception ex) {
 			Logger.getLogger(TimeLogInterceptor.class.getName()).log(

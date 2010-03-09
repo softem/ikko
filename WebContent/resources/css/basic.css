@@ -146,13 +146,16 @@ margin:1em 0;
 
 /* --LIST-- */
 ol, ul {
-margin:1em 1em 1em 3em;
 text-align:justify;
 text-justify:inter-ideograph;
 }
 
 dl {
 margin:1em;
+}
+
+li {
+margin-left:2em;
 }
 
 ol li {

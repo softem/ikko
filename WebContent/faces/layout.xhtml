@@ -15,18 +15,8 @@
 <div id="wrapper">
 <h1><ui:insert name="headline">ログイン</ui:insert></h1>
 <div id="contents">
-	<h:column rendered="#{flash.size()>0}">
-		<div id="message">
-			<ul>
-			<li jsfc="ui:repeat" value="#{flash.entrySet().toArray()}" var="e" >
-				<span jsfc="h:outputText" value="#{e.value}" />
-			</li>
-			</ul>
-		</div>
-	</h:column>
-<ui:insert name="contents">Default contents</ui:insert>
+	<h:messages id="messages" /><ui:insert name="contents">Default contents</ui:insert>
 </div><!-- end of contents -->
-
 <div id="footer">&copy;2010 SOFTEM</div>
 </div><!-- end of wrapper -->
 

@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xml:lang="ja" lang="ja">
@@ -13,10 +14,11 @@
 
 	<ui:define name="contents">
 		<form jsfc="h:form">
+            <f:event type="postValidate" listener="#{security.validate}"/>
 			<div><label for="loginId">ログインID</label>
-			<input jsfc="h:inputText" type="text" value="#{security.employee.loginId}" size="20" maxlength="32" /></div>
+			<input jsfc="h:inputText" type="text" id="loginId" value="#{security.employee.loginId}" size="20" maxlength="32" /></div>
 			<div><label for="password">パスワード</label>
-			<input jsfc="h:inputSecret" type="password" value="#{security.employee.password}" size="20" maxlength="32" /></div>
+			<input jsfc="h:inputSecret" type="password" id="password" value="#{security.employee.password}" size="20" maxlength="32" /></div>
 			<div><input jsfc="h:commandButton" type="submit" action="#{security.login}" value="ログイン"/></div>
 		</form>
 	</ui:define>

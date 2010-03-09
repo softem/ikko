@@ -68,9 +68,13 @@ form div {
 margin-bottom:.5em;
 }
 
-#message {
+div#messages {
+display:none;
+}
+
+#messages {
 background:#fcc;
-padding:.5em 0;
+padding:.5em 0 .1em 0;
 margin-bottom:1em;
 }
 
