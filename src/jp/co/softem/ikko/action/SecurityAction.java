@@ -1,4 +1,4 @@
-package jp.co.softem.ikko.entrance;
+package jp.co.softem.ikko.action;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,7 +18,7 @@ import jp.co.softem.ikko.service.EmployeeService;
 
 @ManagedBean
 @RequestScoped
-public class Security implements Serializable {
+public class SecurityAction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

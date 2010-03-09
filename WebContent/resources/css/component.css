@@ -34,10 +34,13 @@ margin-left:24px;
 margin-left:12px;
 }
 
-#content table tr th,
-#content table tr td {
+#content table tr th {
 border-color:#999;
 text-align:center;
+}
+
+#content table tr td {
+border-color:#999;
 }
 
 #content table tr th {

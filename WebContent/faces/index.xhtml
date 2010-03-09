@@ -14,12 +14,12 @@
 
 	<ui:define name="contents">
 		<form jsfc="h:form">
-            <f:event type="postValidate" listener="#{security.validate}"/>
+            <f:event type="postValidate" listener="#{securityAction.validate}"/>
 			<div><label for="loginId">ログインID</label>
-			<input jsfc="h:inputText" type="text" id="loginId" value="#{security.employee.loginId}" size="20" maxlength="32" /></div>
+			<input jsfc="h:inputText" type="text" id="loginId" value="#{securityAction.employee.loginId}" size="20" maxlength="32" /></div>
 			<div><label for="password">パスワード</label>
-			<input jsfc="h:inputSecret" type="password" id="password" value="#{security.employee.password}" size="20" maxlength="32" /></div>
-			<div><input jsfc="h:commandButton" type="submit" action="#{security.login}" value="ログイン"/></div>
+			<input jsfc="h:inputSecret" type="password" id="password" value="#{securityAction.employee.password}" size="20" maxlength="32" /></div>
+			<div><input jsfc="h:commandButton" type="submit" action="#{securityAction.login}" value="ログイン"/></div>
 		</form>
 	</ui:define>
 

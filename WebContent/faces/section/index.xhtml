@@ -11,21 +11,21 @@
 <body>
 <ui:composition template="../layout.xhtml">
 
-	<ui:define name="title">勤怠管理</ui:define>
-	<ui:define name="headline">勤怠一覧</ui:define>
+	<ui:define name="title">部署管理</ui:define>
+	<ui:define name="headline">部署一覧</ui:define>
 
 	<ui:define name="contents">
 		<table>
 			<thead>
 				<tr>
-					<td>日付</td>
-					<td>プロジェクト</td>
+					<th>#</th>
+					<th>部署名</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr jsfc="ui:repeat" value="#{index.list}" var="row">
-					<td><span jsfc="h:outputText" value="#{row.date}" /></td>
-					<td><span jsfc="h:outputText" value="#{row.projectName}" /></td>
+				<tr jsfc="ui:repeat" value="#{sectionAction.sectionList}" var="row">
+					<td><span jsfc="h:outputText" value="#{row.id}" /></td>
+					<td><span jsfc="h:outputText" value="#{row.sectionName}" /></td>
 				</tr>
 			</tbody>
 		</table>
