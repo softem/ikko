@@ -21,6 +21,9 @@ CREATE TABLE `section` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+INSERT INTO section VALUES(1, '01', '総務', 0);
+INSERT INTO section VALUES(2, '02', '開発', 0);
+
 -- 権限マスタ
 CREATE TABLE `authority` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -29,6 +32,9 @@ CREATE TABLE `authority` (
   `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO authority VALUES(1, '01', '管理者', 0);
+INSERT INTO authority VALUES(2, '02', '一般', 0);
 
 -- 勤怠区分マスタ
 CREATE TABLE `attendance_kind` (
@@ -54,6 +60,8 @@ CREATE TABLE `employee` (
   FOREIGN KEY (SECTION_ID) REFERENCES section(ID),
   FOREIGN KEY (AUTHORITY_ID) REFERENCES authority(ID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO employee VALUES(1, 0, 'ゲスト', 2, 2, 'guest', 'guest', 0);
 
 -- プロジェクトマスタ
 CREATE TABLE `project` (
