@@ -14,77 +14,9 @@
 
 	<ui:define name="title">部署管理</ui:define>
 	<ui:define name="headline">部署一覧</ui:define>
+	<ui:define name="js"><script type="text/javascript" src="/ikko/resources/js/master.js"></script></ui:define>
 
-	<ui:define name="js">
-	$(function() {
-		$('#inputForm').css('display', 'none');
-		$('.editButton').removeAttr('disabled');
-
-		$("#f\\:saveButton").live("click", function(event) {
-			jsf.ajax.request(event.target , event, {
-				execute:"@form", render:"f:sectionTable f:errors", onevent:onStatusChange
-			});
-			event.preventDefault();
-		});
-
-		$("#f\\:deleteButton").live("click", function(event) {
-			if (confirm('本当に削除しますか？')) {
-				jsf.ajax.request(event.target , event, {
-					execute:"@form", render:"f:sectionTable f:errors", onevent:onStatusChange
-				});
-			}
-			event.preventDefault();
-		});
-
-		$('#close').live("click", function(event) {
-			$('#inputForm').css('display', 'none');
-			$('.editButton').removeAttr('disabled');
-			$('#f\\:errors').text('');
-			return false;
-		});
-	});
-
-	var edit = false;
-
-	function showAddForm() {
-		edit = false;
-		$('#f\\:id').val(0);
-		$('#f\\:sectionName').val('');
-		$('#inputForm').css('display', 'block');
-		$('#inputForm input:first').focus();
-		$('#f\\:deleteButton').css('display', 'none');
-		$('.editButton').attr('disabled', true);
-	}
-
-	function showEditForm(id) {
-		edit = true;
-		$('#f\\:id').val(id);
-		$('#f\\:sectionName').val($('#sectionName'+id).text());
-		$('#inputForm').css('display', 'block');
-		$('#inputForm input:first').focus();
-		$('#f\\:deleteButton').css('display', 'inline');
-		$('.editButton').attr('disabled', true);
-	}
-
-	function onStatusChange(data) {
-		if (data.type == 'event') {
-			if (data.status == 'begin') {
-				$('.formButton').attr('disabled', true);
-			}
-			if (data.status == 'success') {
-				if ($('#f\\:errors').html() == '') {
-					$('#inputForm').css('display', 'none');
-					$('.editButton').removeAttr('disabled');
-				} else {
-					$('#f\\:errors').css('color', '#f00');
-					$('.editButton').attr('disabled', true);
-				}
-			}
-			if (data.status == 'complete') {
-				$('.formButton').removeAttr('disabled');
-			}
-		}
-	}
+	<ui:define name="inner-js">
 	</ui:define>
 
 	<ui:define name="contents">
@@ -92,9 +24,13 @@
 		<p><input type="button" class="editButton" value="新規登録" onclick="showAddForm()" /></p>
 		<div id="inputForm" style="height:auto; margin:-6em 0 0 -12em; width:auto;">
 			<div>
-				<label for="sectionName">部署名 <h:message for="sectionName" id="errors"/></label>
-				<h:inputText type="text" id="sectionName" value="#{sectionAction.section.sectionName}" size="32" maxlength="32" required="true">
-					<f:validateLength maximum="25"/>
+				<label for="sectionCode">部署コード <h:message for="sectionCode" id="sectionCodeMessage" class="errors"/></label>
+				<h:inputText type="text" id="sectionCode" value="#{sectionAction.section.sectionCode}" size="4" maxlength="2" required="true">
+					<f:validateLength maximum="2"/>
+				</h:inputText>
+				<label for="sectionName">部署名 <h:message for="sectionName" id="sectionNameMessage" class="errors"/></label>
+				<h:inputText type="text" id="sectionName" value="#{sectionAction.section.sectionName}" size="42" maxlength="40" required="true">
+					<f:validateLength maximum="40"/>
 				</h:inputText>
 				<input jsfc="h:inputHidden" type="hidden" id="id" value="#{sectionAction.section.id}" />
 			</div>
@@ -104,10 +40,14 @@
 				<input type="submit" id="close" class="formButton" value="閉じる" />
 			</div>
 		</div>
-		<h:dataTable id="sectionTable" value="#{sectionAction.sectionList}" var="row">
+		<h:dataTable id="dataTable" value="#{sectionAction.sectionList}" var="row">
 			<h:column>
 				<f:facet name="header"><h:outputText value="ID"/></f:facet>
 				<span id="id#{row.id}">#{row.id}</span>
+			</h:column>
+			<h:column>
+				<f:facet name="header"><h:outputText value="部署コード"/></f:facet>
+				<span id="sectionCode#{row.id}">#{row.sectionCode}</span>
 			</h:column>
 			<h:column>
 				<f:facet name="header"><h:outputText value="部署名"/></f:facet>

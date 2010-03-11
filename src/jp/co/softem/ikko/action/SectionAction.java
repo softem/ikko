@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
-import jp.co.softem.ikko.core.eis.Section;
+import jp.co.softem.ikko.eis.Section;
 import jp.co.softem.ikko.service.SectionService;
 
 @ManagedBean

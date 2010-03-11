@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
 import jp.co.softem.ikko.common.Utils;
-import jp.co.softem.ikko.core.eis.Employee;
+import jp.co.softem.ikko.eis.Employee;
 import jp.co.softem.ikko.service.EmployeeService;
 
 @ManagedBean

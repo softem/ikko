@@ -2,7 +2,7 @@ package jp.co.softem.ikko.service;
 
 import javax.ejb.Stateless;
 
-import jp.co.softem.ikko.core.eis.Section;
+import jp.co.softem.ikko.eis.Section;
 
 @Stateless
 public class SectionService extends BaseService<Section> {

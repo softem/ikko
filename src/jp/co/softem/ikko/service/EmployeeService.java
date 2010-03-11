@@ -3,7 +3,7 @@ package jp.co.softem.ikko.service;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
-import jp.co.softem.ikko.core.eis.Employee;
+import jp.co.softem.ikko.eis.Employee;
 
 @Stateless
 public class EmployeeService extends BaseService<Employee> {
