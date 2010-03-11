@@ -17,7 +17,7 @@ CREATE TABLE `section` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SECTION_CODE` char(2) UNIQUE,  -- 部署コード
   `SECTION_NAME` varchar(40) NOT NULL,  -- 部署名
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -26,7 +26,7 @@ CREATE TABLE `authority` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `AUTHORITY_CODE` char(2) UNIQUE,  -- 権限コード
   `SECTION_NAME` varchar(20) NOT NULL,  -- 権限名
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -36,7 +36,7 @@ CREATE TABLE `attendance_kind` (
   `ATTENDANCE_KIND` char(2) UNIQUE,  -- プロジェクト勤怠区分
   `ATTENDANCE_KIND_NAME` varchar(20) NOT NULL,  -- 勤怠区分名
   `ATTENDANCE_KIND_MARK` char(2) NOT NULL,  -- 勤怠区分記号
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -49,7 +49,7 @@ CREATE TABLE `employee` (
   `AUTHORITY_ID` int(11) NOT NULL,  -- 権限ID
   `LOGIN_ID` varchar(32) NOT NULL,  -- ログインID
   `PASSWORD` varchar(32) NOT NULL,  -- パスワード
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`),
   FOREIGN KEY (SECTION_ID) REFERENCES section(ID),
   FOREIGN KEY (AUTHORITY_ID) REFERENCES authority(ID)
@@ -61,7 +61,7 @@ CREATE TABLE `project` (
   `PROJECT_CODE` char(20) UNIQUE,  -- プロジェクトコード
   `PROJECT_NAME` varchar(20) NOT NULL,  -- プロジェクト名
   `WORK_PLACE` varchar(20) NOT NULL,  -- 作業場所
-  `FLEX_FLAG` char(1) DEFAULT '0',  -- フレックスフラグ
+  `FLEX_FLAG` tinyint(1) DEFAULT 0,  -- フレックスフラグ
   `CORE_TIME_START` time DEFAULT NULL,  -- コアタイム開始時刻
   `CORE_TIME_FINISH` time DEFAULT NULL,  -- コアタイム終了時刻
   `UNIT_MINUTE` int(2) NOT NULL,  -- 単位時間（分）
@@ -76,7 +76,7 @@ CREATE TABLE `project` (
   `FIX_FINISH_TIME` time DEFAULT NULL,  -- 定時終了時刻
   `AFTER_FIX_START_TIME` time DEFAULT NULL,  -- 定時後開始時刻
   `AFTER_FIX_FINISH_TIME` time DEFAULT NULL,  -- 前日終了時刻
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -86,7 +86,7 @@ CREATE TABLE `holiday` (
   `PROJECT_ID` int(11) NOT NULL,  -- プロジェクトID
   `HOLIDAY_DATE` date NOT NULL,  -- 休日日付
   `HOLIDAY_NAME` varchar(20) NOT NULL,  -- 休日名
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`),
   UNIQUE (PROJECT_ID,HOLIDAY_DATE),
   FOREIGN KEY (PROJECT_ID) REFERENCES project(ID)
@@ -99,7 +99,7 @@ CREATE TABLE `rest` (
   `REST_NO` int(11) NOT NULL,  -- 休憩マスタ連番
   `REST_START_TIME` time NOT NULL,  -- 休憩開始
   `REST_FINISH_TIME` time NOT NULL,  -- 休憩終了
-  `DELETE_FLAG` char(1) DEFAULT '0',  -- 削除済みフラグ
+  `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`),
   UNIQUE (PROJECT_ID,REST_NO),
   FOREIGN KEY (PROJECT_ID) REFERENCES project(ID)
@@ -152,8 +152,8 @@ CREATE TABLE `business_report_smmary` (
   `HARF_HOLIDAY_TIME_SUMMARY` time DEFAULT NULL,  -- 半休取得合計時間
   `LEGAL_HOLIDAY_WORK_SUMMARY` time DEFAULT NULL,  -- 法定休出合計時間
   `ALL_OVERTIME_WORK_SUMMARY` time DEFAULT NULL, -- 総残業時間
-  `EVENT_FLAG` char(1) DEFAULT '0',  -- 社内イベントフラグ
-  `MONTHLY_SEPARATE_FLAG` char(1) DEFAULT '0',  -- 月末締めフラグ
+  `EVENT_FLAG` tinyint(1) DEFAULT 0,  -- 社内イベントフラグ
+  `MONTHLY_SEPARATE_FLAG` tinyint(1) DEFAULT 0,  -- 月末締めフラグ
   PRIMARY KEY (`ID`),
   UNIQUE (EMPLOYEE_ID,BUSINESS_REPORT_MONTH),
   FOREIGN KEY (EMPLOYEE_ID) REFERENCES employee(ID)
@@ -169,7 +169,7 @@ CREATE TABLE `commuter_ticket` (
   `LINE_NAME` varchar(40) NOT NULL,  -- 路線名
   `STATION_NAME_START` varchar(40) NOT NULL,  -- 駅名(始点)
   `STATION_NAME_END` varchar(40) NOT NULL,  -- 駅名(終点)
-  `ticket_price` int(6) NOT NULL,  -- 金額
+  `TICKET_PRICE` int(6) NOT NULL,  -- 金額
   PRIMARY KEY (`ID`),
   UNIQUE (EMPLOYEE_ID,COMMUTER_TICKET_MONTH,COMMUTER_TICKET_NO),
   FOREIGN KEY (EMPLOYEE_ID) REFERENCES employee(ID)
