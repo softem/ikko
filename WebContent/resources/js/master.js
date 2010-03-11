@@ -4,7 +4,7 @@
 
 		$("#f\\:saveButton").live("click", function(event) {
 			jsf.ajax.request(event.target , event, {
-				execute:"@form", render:"f:dataTable f:sectionCodeMessage f:sectionNameMessage", onevent:onStatusChange
+				execute:"@form", render:targetRender, onevent:onStatusChange
 			});
 			event.preventDefault();
 		});
@@ -12,7 +12,7 @@
 		$("#f\\:deleteButton").live("click", function(event) {
 			if (confirm('本当に削除しますか？')) {
 				jsf.ajax.request(event.target , event, {
-					execute:"@form", render:"f:dataTable f:sectionCodeMessage f:sectionNameMessage", onevent:onStatusChange
+					execute:"@form", render:targetRender, onevent:onStatusChange
 				});
 			}
 			event.preventDefault();
@@ -29,10 +29,15 @@
 	var edit = false;
 
 	function showAddForm() {
+
 		edit = false;
+
 		$('#f\\:id').val(0);
-		$('#f\\:sectionCode').val('');
-		$('#f\\:sectionName').val('');
+		var i = 0;
+		for (i = 0; i < targetItems.length; i++) {
+			$('#f\\:' + targetItems[i]).val('');
+		}
+
 		$('#inputForm').css('display', 'block');
 		$('#inputForm input:first').focus();
 		$('#f\\:deleteButton').css('display', 'none');
@@ -40,10 +45,15 @@
 	}
 
 	function showEditForm(id) {
+
 		edit = true;
+
 		$('#f\\:id').val(id);
-		$('#f\\:sectionCode').val($('#sectionCode'+id).text());
-		$('#f\\:sectionName').val($('#sectionName'+id).text());
+		var i = 0;
+		for (i = 0; i < targetItems.length; i++) {
+			$('#f\\:' + targetItems[i]).val($('#' + targetItems[i] + id).text());
+		}
+
 		$('#inputForm').css('display', 'block');
 		$('#inputForm input:first').focus();
 		$('#f\\:deleteButton').css('display', 'inline');
