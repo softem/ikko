@@ -23,7 +23,7 @@ public class SecurityAction implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final ResourceBundle RB = ResourceBundle
-			.getBundle("messages");
+			.getBundle("Messages");
 
 	@EJB
 	private EmployeeService service;

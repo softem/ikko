@@ -5,7 +5,4 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 
-      <interceptors>
-          <class>jp.co.softem.ikko.common.TimeLogInterceptor</class>
-      </interceptors>
 </beans>

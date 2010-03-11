@@ -41,7 +41,7 @@ public abstract class BaseService<T> implements Serializable {
 	}
 
 	public void delete(T o) {
-		em.remove(o);
+		em.remove(em.merge(o));
 	}
 
 }

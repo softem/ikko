@@ -67,25 +67,26 @@ label {
 display:block;
 }
 
-form div {
+#footer {
+margin:20px 0;
+}
+
+#inputForm {
+background:#fff;
+border:2px solid #999;
+display:none;
+padding:1em;
+position:fixed;
+opacity:0.9;
+left:50%;
+top:50%;
+text-align:left;
+}
+
+#inputForm div {
 margin-bottom:.5em;
 }
 
-div#messages {
-display:none;
-}
-
-#messages {
-background:#fcc;
-padding:.5em 0 .1em 0;
-margin-bottom:1em;
-}
-
-#footer {
-margin-top:40px;
-}
-
-form {
-padding:1em;
-text-align:left;
+#loginForm div {
+margin-bottom:.5em;
 }

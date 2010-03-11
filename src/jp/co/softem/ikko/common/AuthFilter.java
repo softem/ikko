@@ -23,14 +23,14 @@ public class AuthFilter implements Filter {
 		try {
 			String target = ((HttpServletRequest) request).getRequestURI();
 			HttpSession session = ((HttpServletRequest) request).getSession();
-			System.out.println(target);
+//			System.out.println(target);
 			if (session == null) {
 				// /* まだ認証されていない */
 				// session = ((HttpServletRequest) request).getSession(true);
 				// session.setAttribute("target", target);
 				// ((HttpServletResponse) response).sendRedirect("/auth/Login");
 			} else {
-				System.out.println(session.getAttribute("employee"));
+//				System.out.println(session.getAttribute("employee"));
 				// Object loginCheck = session.getAttribute("login");
 				// if (loginCheck == null) {
 				// /* まだ認証されていない */

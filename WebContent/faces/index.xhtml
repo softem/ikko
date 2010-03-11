@@ -13,7 +13,8 @@
 <ui:composition template="layout.xhtml">
 
 	<ui:define name="contents">
-		<form jsfc="h:form">
+		<h:messages />
+		<form jsfc="h:form" id="loginForm">
             <f:event type="postValidate" listener="#{securityAction.validate}"/>
 			<div><label for="loginId">ログインID</label>
 			<input jsfc="h:inputText" type="text" id="loginId" value="#{securityAction.employee.loginId}" size="20" maxlength="32" /></div>

@@ -17,74 +17,108 @@
 
 	<ui:define name="js">
 	$(function() {
-	});
+		$('#inputForm').css('display', 'none');
+		$('.editButton').removeAttr('disabled');
 
-	var savedId = -1;
+		$("#f\\:saveButton").live("click", function(event) {
+			jsf.ajax.request(event.target , event, {
+				execute:"@form", render:"f:sectionTable f:errors", onevent:onStatusChange
+			});
+			event.preventDefault();
+		});
 
-	function showForm(id) {
-		savedId = id;
-		$('#f\\:id').val($('#id'+id).html());
-		if (id > 0) {
-			$('#f\\:sectionName').val($('#sectionName'+id).html());
-		}
-		$.blockUI({message: $('#inputForm')});
-		$('#close').click(function() {
-			$.unblockUI();
+		$("#f\\:deleteButton").live("click", function(event) {
+			if (confirm('本当に削除しますか？')) {
+				jsf.ajax.request(event.target , event, {
+					execute:"@form", render:"f:sectionTable f:errors", onevent:onStatusChange
+				});
+			}
+			event.preventDefault();
+		});
+
+		$('#close').live("click", function(event) {
+			$('#inputForm').css('display', 'none');
+			$('.editButton').removeAttr('disabled');
+			$('#f\\:errors').text('');
 			return false;
 		});
+	});
+
+	var edit = false;
+
+	function showAddForm() {
+		edit = false;
+		$('#f\\:id').val(0);
+		$('#f\\:sectionName').val('');
+		$('#inputForm').css('display', 'block');
+		$('#inputForm input:first').focus();
+		$('#f\\:deleteButton').css('display', 'none');
+		$('.editButton').attr('disabled', true);
+	}
+
+	function showEditForm(id) {
+		edit = true;
+		$('#f\\:id').val(id);
+		$('#f\\:sectionName').val($('#sectionName'+id).text());
+		$('#inputForm').css('display', 'block');
+		$('#inputForm input:first').focus();
+		$('#f\\:deleteButton').css('display', 'inline');
+		$('.editButton').attr('disabled', true);
 	}
 
 	function onStatusChange(data) {
 		if (data.type == 'event') {
 			if (data.status == 'begin') {
-				$('form :submit').attr('disabled', true);
+				$('.formButton').attr('disabled', true);
 			}
 			if (data.status == 'success') {
-				var entity = eval('(' + $('#f\\:response').val() + ')');
-				$('#f\\:response').val('');
-				$('#id' + savedId).text(entity.id);
-				$('#sectionName' + savedId).text(entity.sectionName);
-				$.unblockUI();
+				if ($('#f\\:errors').html() == '') {
+					$('#inputForm').css('display', 'none');
+					$('.editButton').removeAttr('disabled');
+				} else {
+					$('#f\\:errors').css('color', '#f00');
+					$('.editButton').attr('disabled', true);
+				}
 			}
 			if (data.status == 'complete') {
-				$('form :submit').removeAttr('disabled');
+				$('.formButton').removeAttr('disabled');
 			}
 		}
 	}
 	</ui:define>
 
 	<ui:define name="contents">
-		<p><input type="button" class="editButton" value="新規登録" onclick="showForm(-1)" /></p>
-		<div id="inputForm" style="display:none;">
-			<form jsfc="h:form" id="f" >
-				<div><label for="sectionName">部署名</label>
-				<input jsfc="h:inputText" type="text" id="sectionName" value="#{sectionAction.section.sectionName}" size="32" maxlength="32" /></div>
+	<form jsfc="h:form" id="f" >
+		<p><input type="button" class="editButton" value="新規登録" onclick="showAddForm()" /></p>
+		<div id="inputForm" style="height:auto; margin:-6em 0 0 -12em; width:auto;">
+			<div>
+				<label for="sectionName">部署名 <h:message for="sectionName" id="errors"/></label>
+				<h:inputText type="text" id="sectionName" value="#{sectionAction.section.sectionName}" size="32" maxlength="32" required="true">
+					<f:validateLength maximum="25"/>
+				</h:inputText>
 				<input jsfc="h:inputHidden" type="hidden" id="id" value="#{sectionAction.section.id}" />
-				<div>
-					<input jsfc="h:commandButton" type="submit" actionListener="#{sectionAction.save}" value="保存">
-						<f:ajax execute="@form" render="response" onevent="onStatusChange" />
-					</input>
-					<input jsfc="h:inputHidden" type="hidden" id="response" value="#{sectionAction.response}"/>
-					<input type="submit" id="close" value="閉じる"/>
-				</div>
-			</form>
+			</div>
+			<div style="text-align:right;">
+				<input jsfc="h:commandButton" type="submit" id="saveButton" class="formButton" actionListener="#{sectionAction.save}" value="保存" style="float:left;" />
+				<input jsfc="h:commandButton" type="submit" id="deleteButton" class="formButton" actionListener="#{sectionAction.delete}" value="削除" />
+				<input type="submit" id="close" class="formButton" value="閉じる" />
+			</div>
 		</div>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>部署名</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr jsfc="ui:repeat" value="#{sectionAction.sectionList}" var="row">
-					<td id="id#{row.id}"><span jsfc="h:outputText" value="#{row.id}" /></td>
-					<td id="sectionName#{row.id}"><span jsfc="h:outputText" value="#{row.sectionName}" /></td>
-					<td><input type="button" class="editButton" value="編集" onclick="showForm(#{row.id})" /></td>
-				</tr>
-			</tbody>
-		</table>
+		<h:dataTable id="sectionTable" value="#{sectionAction.sectionList}" var="row">
+			<h:column>
+				<f:facet name="header"><h:outputText value="ID"/></f:facet>
+				<span id="id#{row.id}">#{row.id}</span>
+			</h:column>
+			<h:column>
+				<f:facet name="header"><h:outputText value="部署名"/></f:facet>
+				<span id="sectionName#{row.id}">#{row.sectionName}</span>
+			</h:column>
+			<h:column>
+				<f:facet name="header"><h:outputText value="操作"/></f:facet>
+				<input type="button" class="editButton" value="編集" onclick="showEditForm(#{row.id})" />
+			</h:column>
+		</h:dataTable>
+	</form>
 	</ui:define>
 
 </ui:composition>

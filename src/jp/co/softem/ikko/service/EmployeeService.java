@@ -3,10 +3,8 @@ package jp.co.softem.ikko.service;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
-import jp.co.softem.ikko.common.TimeLog;
 import jp.co.softem.ikko.core.eis.Employee;
 
-@TimeLog
 @Stateless
 public class EmployeeService extends BaseService<Employee> {
 
