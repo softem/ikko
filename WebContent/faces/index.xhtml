@@ -12,15 +12,25 @@
 <body>
 <ui:composition template="layout.xhtml">
 
+	<ui:define name="inner-js">
+	$(function() {
+		$('#loginForm').corner();
+	});
+	</ui:define>
+
 	<ui:define name="contents">
-		<h:messages />
+		<h:messages id="errors" />
 		<form jsfc="h:form" id="loginForm">
-            <f:event type="postValidate" listener="#{securityAction.validate}"/>
-			<div><label for="loginId">ログインID</label>
-			<input jsfc="h:inputText" type="text" id="loginId" value="#{securityAction.employee.loginId}" size="20" maxlength="32" /></div>
-			<div><label for="password">パスワード</label>
-			<input jsfc="h:inputSecret" type="password" id="password" value="#{securityAction.employee.password}" size="20" maxlength="32" /></div>
-			<div><input jsfc="h:commandButton" type="submit" action="#{securityAction.login}" value="ログイン"/></div>
+            <f:event type="postValidate" listener="#{securityPage.validate}"/>
+			<div>
+				<label for="loginId">ログインID</label>
+				<input jsfc="h:inputText" type="text" id="loginId" value="#{securityPage.employee.loginId}" size="34" maxlength="32" />
+			</div>
+			<div>
+				<label for="password">パスワード</label>
+				<input jsfc="h:inputSecret" type="password" id="password" value="#{securityPage.employee.password}" size="34" maxlength="32" />
+			</div>
+			<div><input jsfc="h:commandButton" type="submit" action="#{securityPage.login}" value="ログイン"/></div>
 		</form>
 	</ui:define>
 
