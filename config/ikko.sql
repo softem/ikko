@@ -15,31 +15,28 @@ DROP TABLE IF EXISTS project;
 -- 部署マスタ
 CREATE TABLE `section` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `SECTION_CODE` char(2) UNIQUE,  -- 部署コード
   `SECTION_NAME` varchar(40) NOT NULL,  -- 部署名
   `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO section VALUES(1, '01', '総務', 0);
-INSERT INTO section VALUES(2, '02', '開発', 0);
+INSERT INTO section VALUES(1, '総務', 0);
+INSERT INTO section VALUES(2, '開発', 0);
 
 -- 権限マスタ
 CREATE TABLE `authority` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AUTHORITY_CODE` char(2) UNIQUE,  -- 権限コード
   `SECTION_NAME` varchar(20) NOT NULL,  -- 権限名
   `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO authority VALUES(1, '01', '管理者', 0);
-INSERT INTO authority VALUES(2, '02', '一般', 0);
+INSERT INTO authority VALUES(1, '管理者', 0);
+INSERT INTO authority VALUES(2, '一般', 0);
 
 -- 勤怠区分マスタ
 CREATE TABLE `attendance_kind` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ATTENDANCE_KIND` char(2) UNIQUE,  -- プロジェクト勤怠区分
   `ATTENDANCE_KIND_NAME` varchar(20) NOT NULL,  -- 勤怠区分名
   `ATTENDANCE_KIND_MARK` char(2) NOT NULL,  -- 勤怠区分記号
   `DELETE_FLAG` tinyint(1) DEFAULT 0,  -- 削除済みフラグ

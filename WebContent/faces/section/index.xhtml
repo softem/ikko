@@ -14,8 +14,13 @@
 
 	<ui:define name="title">部署管理</ui:define>
 	<ui:define name="headline">部署一覧</ui:define>
-	<ui:define name="config"><script type="text/javascript" src="/ikko/resources/js/config/section.js"></script></ui:define>
-	<ui:define name="js"><script type="text/javascript" src="/ikko/resources/js/master.js"></script></ui:define>
+	<ui:define name="js"><script type="text/javascript" src="/ikko/resources/js/input.form.js"></script></ui:define>
+	<ui:define name="inner-js">
+	var inputForm = new InputForm(new Array('sectionName'));
+	$(function() {
+		inputForm.init();
+	});
+	</ui:define>
 
 	<ui:define name="contents">
 	<div id="local-menu">
@@ -23,14 +28,8 @@
 	</div>
 
 	<form jsfc="h:form" id="f" >
-		<p><input type="button" class="editButton" value="新規登録" onclick="showAddForm()" /></p>
+		<p><input type="button" class="editButton" value="新規登録" onclick="inputForm.showAddForm()" /></p>
 		<div id="inputForm" style="height:auto; margin:-6em 0 0 -14em; width:28em;">
-			<div>
-				<label for="sectionCode">部署コード <h:message for="sectionCode" id="sectionCodeMessage" class="error"/></label>
-				<h:inputText type="text" id="sectionCode" value="#{sectionPage.section.sectionCode}" size="4" maxlength="2" required="true" class="ime">
-					<f:validateLength maximum="2"/>
-				</h:inputText>
-			</div>
 			<div>
 				<label for="sectionName">部署名 <h:message for="sectionName" id="sectionNameMessage" class="error"/></label>
 				<h:inputText type="text" id="sectionName" value="#{sectionPage.section.sectionName}" size="42" maxlength="40" required="true">
@@ -51,16 +50,12 @@
 				<span id="id#{row.id}">#{row.id}</span>
 			</h:column>
 			<h:column>
-				<f:facet name="header"><h:outputText value="部署コード"/></f:facet>
-				<span id="sectionCode#{row.id}">#{row.sectionCode}</span>
-			</h:column>
-			<h:column>
 				<f:facet name="header"><h:outputText value="部署名"/></f:facet>
 				<span id="sectionName#{row.id}">#{row.sectionName}</span>
 			</h:column>
 			<h:column>
 				<f:facet name="header"><h:outputText value="操作"/></f:facet>
-				<input type="button" class="editButton" value="編集" onclick="showEditForm(#{row.id})" />
+				<input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(#{row.id})" />
 			</h:column>
 		</h:dataTable><!-- end of list -->
 	</form>
