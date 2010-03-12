@@ -74,13 +74,40 @@ public abstract class BaseService<T> implements Serializable {
 	 * <li>リストはID(昇順)で並んでいます。</li>
 	 * </ul>
 	 * 
+	 * @param deleteFlag
+	 *            削除フラグ
 	 * @return Entityのリスト
 	 */
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		return em.createQuery(
-				"select e from " + type.getSimpleName() + " e order by e.id")
-				.setMaxResults(MAX_RESULT).getResultList();
+		String sql = "select e from " + type.getSimpleName()
+				+ " e order by e.id";
+		return em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
+	}
+
+	/**
+	 * Entityの一覧を返答します。
+	 * 
+	 * <ul>
+	 * <li>最大200件まで返答します。</li>
+	 * <li>リストはID(昇順)で並んでいます。</li>
+	 * <li>削除フラグがtrueの場合は削除フラグがoffの情報のみ返答します。</li>
+	 * </ul>
+	 * 
+	 * @param deleteFlag
+	 *            削除フラグ
+	 * @return Entityのリスト
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> findAll(boolean deleteFlag) {
+		String sql = "";
+		if (deleteFlag) {
+			sql = "select e from " + type.getSimpleName()
+					+ " e where e.deleteFlag = 0 order by e.id";
+		} else {
+			sql = "select e from " + type.getSimpleName() + " e order by e.id";
+		}
+		return em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
 	}
 
 	/**

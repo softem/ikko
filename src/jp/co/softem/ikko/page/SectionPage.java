@@ -52,7 +52,7 @@ public class SectionPage implements Serializable {
 	@PostConstruct
 	public void init() {
 		section = new Section();
-		sectionList = service.findAll();
+		sectionList = service.findAll(true);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class SectionPage implements Serializable {
 			// TODO:バリデーション
 			service.insert(section);
 		}
-		sectionList = service.findAll();
+		sectionList = service.findAll(true);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class SectionPage implements Serializable {
 	public void delete(ActionEvent ae) {
 		// TODO:バリデーション
 		service.delete(section);
-		sectionList = service.findAll();
+		sectionList = service.findAll(true);
 	}
 
 }
