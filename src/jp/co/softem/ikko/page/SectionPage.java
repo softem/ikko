@@ -33,7 +33,7 @@ public class SectionPage extends BasePage {
 
 	@Default
 	public Navigation index() {
-		pageInfo.setPage("section_list");
+		pageInfo.setPage("section");
 		return Forward.to(TEMPLATE);
 	}
 
