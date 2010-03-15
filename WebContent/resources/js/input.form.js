@@ -12,6 +12,32 @@ function randerTable(name) {
 	});
 }
 
+function success(json, name) {
+	if (json.error) {
+		for (key in json.messages) {
+			$('#' + key + 'Message').text(json.messages[key]);
+		}
+	} else {
+		randerTable(name);
+		$.unblockUI();
+	}
+}
+
+function execBlockUI() {
+	$.blockUI({
+		message: $('#inputForm'),
+		css: {
+			width: 'auto',
+			border: '2px solid #666',
+			padding: '1em',
+			backgroundColor: '#fff',
+			'-webkit-border-radius': '10px',
+			'-moz-border-radius': '10px',
+			opacity: .9
+		}
+	});
+}
+
 /**
  * 入力フォームクラスです。
  * 
@@ -29,36 +55,34 @@ InputForm.prototype = {
 
 	'init' : function() {
 		var name = this.tableName;
-		$('#saveButton').click(function() {
+
+		$("#inputForm").ajaxComplete(function(event, XMLHttpRequest, options){
+			$('.formButton').removeAttr('disabled');
+		});
+
+	    $('#saveButton').click(function() {
+			$('.formButton').attr('disabled', true);
 			$('#inputForm').ajaxSubmit({
 				url: '/ikko/' + name + '/save',
 				dataType: 'json',
 				success: function(json) {
-					if (json.error) {
-						for (key in json.messages) {
-							$('#' + key + 'Message').text(json.messages[key]);
-						}
-					} else {
-						randerTable(name);
-						$.unblockUI();
-					}
+					success(json, name);
 				}
 			});
 			return false;
 		});
-	},
 
-	'execBlockUI' : function() {
-		$.blockUI({
-			message: $('#inputForm'),
-			css: {
-				width: 'auto',
-				border: '2px solid #666',
-				padding: '1em',
-				backgroundColor: '#fff',
-				'-webkit-border-radius': '10px',
-				'-moz-border-radius': '10px',
-				opacity: .9
+		$('#deleteButton').click(function() {
+			$('.formButton').attr('disabled', true);
+			if (confirm('本当に削除しますか？')) {
+				$('#inputForm').ajaxSubmit({
+					url: '/ikko/' + name + '/delete',
+					dataType: 'json',
+					success: function(json) {
+						success(json, name);
+					}
+				});
+				return false;
 			}
 		});
 	},
@@ -67,11 +91,12 @@ InputForm.prototype = {
 	 * 入力フォーム表示(新規登録)
 	 */
 	'showAddForm' : function() {
+		$('#deleteButton').css('display', 'none');
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
 			$('#' + this.fields[i]).val('');
 		}
-		this.execBlockUI();
+		execBlockUI();
 	},
 
 	/**
@@ -80,11 +105,12 @@ InputForm.prototype = {
 	 * @param id
 	 */
 	'showEditForm' : function(id) {
+		$('#deleteButton').css('display', 'inline');
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
 			$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
 		}
-		this.execBlockUI();
+		execBlockUI();
 	}
 
 };

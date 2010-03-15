@@ -16,11 +16,11 @@ $(function() {
 		<label for="sectionName">部署名 <span id="sectionNameMessage" class="message"></span></label>
 		<input type="text" id="sectionName" name="sectionName" size="42" maxlength="40" />
 	</div>
-	<div>
+	<div style="text-align:right">
 		<input type="hidden" id="id" name="id" />
-		<input type="button" id="saveButton" value="保存" />
-		<input type="button" id="deleteButton" value="削除" />
-		<input type="button" id="closeButton" value="閉じる" onclick="$.unblockUI()" />
+		<input type="button" id="saveButton" class="formButton" value="保存" style="float:left" />
+		<input type="button" id="deleteButton" class="formButton" value="削除" />
+		<input type="button" id="closeButton" class="formButton" value="閉じる" onclick="$.unblockUI()" />
 	</div>
 </form>
 
