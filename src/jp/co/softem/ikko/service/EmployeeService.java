@@ -27,7 +27,7 @@ import jp.co.softem.ikko.eis.Employee;
  * @author yoshikazu
  */
 @Stateless
-public class EmployeeService extends BaseService<Employee> {
+public class EmployeeService extends BaseService<Employee, Integer> {
 
 	private static final long serialVersionUID = 1L;
 

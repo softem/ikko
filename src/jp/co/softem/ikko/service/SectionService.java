@@ -16,6 +16,8 @@
  */
 package jp.co.softem.ikko.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 
 import jp.co.softem.ikko.eis.Section;
@@ -26,12 +28,28 @@ import jp.co.softem.ikko.eis.Section;
  * @author yoshikazu
  */
 @Stateless
-public class SectionService extends BaseService<Section> {
+public class SectionService extends BaseService<Section, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
 	public SectionService() {
 		super(Section.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Section> listBySectionName(String sectionName) {
+		return em.createQuery(
+				"select e from Section e where e.sectionName = :sectionName")
+				.setParameter("sectionName", sectionName).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Section> listBySectionName(int id, String sectionName) {
+		return em
+				.createQuery(
+						"select e from Section e where e.id <> :id and e.sectionName = :sectionName")
+				.setParameter("id", id)
+				.setParameter("sectionName", sectionName).getResultList();
 	}
 
 }

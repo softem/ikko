@@ -30,7 +30,8 @@ import javax.persistence.PersistenceContext;
  * @param <T>
  *            Entityクラスの型
  */
-public abstract class BaseService<T> implements Serializable {
+public abstract class BaseService<T, PK extends Serializable> implements
+		Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -62,7 +63,7 @@ public abstract class BaseService<T> implements Serializable {
 	 *            主キー
 	 * @return Entity
 	 */
-	public T findById(Long id) {
+	public T findById(int id) {
 		return (T) em.find(type, id);
 	}
 
@@ -81,7 +82,7 @@ public abstract class BaseService<T> implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		String sql = "select e from " + type.getSimpleName()
-				+ " e order by e.id";
+				+ " e where e.deleteFlag = 0 order by e.id";
 		return em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
 	}
 
@@ -102,8 +103,7 @@ public abstract class BaseService<T> implements Serializable {
 	public List<T> findAll(boolean deleteFlag) {
 		String sql = "";
 		if (deleteFlag) {
-			sql = "select e from " + type.getSimpleName()
-					+ " e where e.deleteFlag = 0 order by e.id";
+			return findAll();
 		} else {
 			sql = "select e from " + type.getSimpleName() + " e order by e.id";
 		}
@@ -136,8 +136,20 @@ public abstract class BaseService<T> implements Serializable {
 	 * @param o
 	 *            削除するEntity
 	 */
-	public void delete(T o) {
-		em.remove(em.merge(o));
+	public void delete(PK key) {
+		String sql = "update " + type.getSimpleName()
+				+ " e set e.deleteFlag = 1 where e.id = " + key;
+		em.createQuery(sql).executeUpdate();
+	}
+
+	/**
+	 * Entityを削除します。
+	 * 
+	 * @param o
+	 *            削除するEntity
+	 */
+	public void deletePhysical(PK key) {
+		em.remove(em.getReference(type, key));
 	}
 
 }

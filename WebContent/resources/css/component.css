@@ -10,7 +10,6 @@ height:70px;
 h2 {
 border-bottom:1px solid #999;
 font-size:130%;
-margin-bottom:1em;
 }
 
 #outline h2,
@@ -33,10 +32,10 @@ margin-left:24px;
 }
 
 /* #content */
-#content p,
+/*#content p,
 #content table {
 margin-left:12px;
-}
+}*/
 
 #content table tr th {
 border-color:#999;
@@ -79,13 +78,7 @@ padding-top:5px;
 }
 
 #inputForm {
-background:#fff;
-border:2px solid #999;
 display:none;
-padding:1em;
-position:fixed;
-left:50%;
-top:50%;
 text-align:left;
 }
 
@@ -114,8 +107,9 @@ float:right;
 text-align:right;
 }
 
-#errors {
+.message {
 color:#f00;
+margin-bottom:1em;
 }
 
 .ime {

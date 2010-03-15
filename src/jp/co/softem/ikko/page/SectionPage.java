@@ -1,120 +1,81 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package jp.co.softem.ikko.page;
 
-import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
+import javax.inject.Named;
 
+import jp.co.softem.ikko.core.BasePage;
+import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.Section;
 import jp.co.softem.ikko.service.SectionService;
 
-/**
- * 部署マスタ管理画面用のページクラスです。
- * 
- * @author yoshikazu
- */
-@ManagedBean
-@RequestScoped
-public class SectionPage implements Serializable {
+import org.t2framework.commons.annotation.composite.RequestScope;
+import org.t2framework.t2.action.ErrorInfo;
+import org.t2framework.t2.annotation.composite.GET;
+import org.t2framework.t2.annotation.composite.POST;
+import org.t2framework.t2.annotation.core.ActionPath;
+import org.t2framework.t2.annotation.core.Ajax;
+import org.t2framework.t2.annotation.core.Default;
+import org.t2framework.t2.annotation.core.Form;
+import org.t2framework.t2.annotation.core.Page;
+import org.t2framework.t2.navigation.Forward;
+import org.t2framework.t2.navigation.Json;
+import org.t2framework.t2.spi.Navigation;
 
-	private static final long serialVersionUID = 1L;
+@RequestScope
+@Named
+@Page("section")
+public class SectionPage extends BasePage {
 
 	@EJB
-	private SectionService service;
+	SectionService service;
 
-	private Section section;
-
-	private List<Section> sectionList;
-
-	/**
-	 * 初期処理を実行します。
-	 */
-	@PostConstruct
-	public void init() {
-		section = new Section();
-		sectionList = service.findAll(true);
+	@Default
+	public Navigation index() {
+		pageInfo.setPage("section_list");
+		return Forward.to(TEMPLATE);
 	}
 
-	/**
-	 * 部署マスタを返答します。
-	 * 
-	 * @return 部署マスタ
-	 */
-	public Section getSection() {
-		return section;
-	}
-
-	/**
-	 * 部署マスタの一覧を返答します。
-	 * 
-	 * @return 部署マスタのリスト
-	 */
-	public List<Section> getSectionList() {
-		return sectionList;
-	}
-
-	/**
-	 * 部署マスタ用のDAOクラスを設定します。
-	 * 
-	 * @param service
-	 *            部署マスタDAOクラス
-	 */
-	public void setService(SectionService service) {
-		this.service = service;
-	}
-
-	/**
-	 * 部署マスタを保存します。
-	 * 
-	 * <ul>
-	 * <li>IDが0未満の値が設定された場合は対象情報をデータベースに追加します。</li>
-	 * <li>IDに1以上の値が設定された場合は対象情報を更新します。</li>
-	 * </ul>
-	 * 
-	 * @param ae
-	 *            イベントクラス
-	 */
-	public void save(ActionEvent ae) {
+	@POST
+	@ActionPath
+	@Ajax
+	public Navigation save(@Form Section section, ErrorInfo info) {
+		JsonResult result = new JsonResult();
 		if (section.getId() > 0) {
-			// TODO:バリデーション
 			service.update(section);
 		} else {
-			// TODO:バリデーション
-			service.insert(section);
+			if (section.getSectionName() == null
+					|| section.getSectionName().length() == 0) {
+				result.put("sectionName", "message.required");
+			}
+			if (!result.isError()) {
+				service.insert(section);
+			}
 		}
-		sectionList = service.findAll(true);
+		return Json.convert(result);
 	}
 
-	/**
-	 * 部署マスタを削除します。
-	 * 
-	 * @param ae
-	 *            イベントクラス
-	 */
-	public void delete(ActionEvent ae) {
-		// TODO:バリデーション
-		service.delete(section);
-		sectionList = service.findAll(true);
+	@POST
+	@ActionPath
+	@Ajax
+	public Navigation delete(@Form Section section, ErrorInfo info) {
+		service.delete(section.getId());
+		return Json.convert(section);
+	}
+
+	@GET
+	@Ajax
+	public Navigation table() {
+		return Forward.to("/WEB-INF/pages/section_table.jsp");
+	}
+
+	public List<Section> getList() {
+		return service.findAll();
+	}
+
+	public Section getSection() {
+		return new Section();
 	}
 
 }
