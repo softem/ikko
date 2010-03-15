@@ -18,7 +18,7 @@
 
 			<div id="content">
 				<h2>${pageInfo.title}</h2>
-				<div id="message">${pageInfo.message}</div>
+				<div class="message">${pageInfo.message}</div>
 <jsp:include page="${pageInfo.page}"></jsp:include>	
 			</div><!-- end of content -->
 

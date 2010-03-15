@@ -42,12 +42,26 @@ public class SectionPage extends BasePage {
 	@Ajax
 	public Navigation save(@Form Section section, ErrorInfo info) {
 		JsonResult result = new JsonResult();
+		int id = section.getId();
+		String sectionName = section.getSectionName();
 		if (section.getId() > 0) {
-			service.update(section);
-		} else {
-			if (section.getSectionName() == null
-					|| section.getSectionName().length() == 0) {
+			if (sectionName == null || sectionName.length() == 0) {
 				result.put("sectionName", "message.required");
+			}
+			List<Section> finded = service.listBySectionName(id, sectionName);
+			if (finded.size() > 0) {
+				result.put("sectionName", "message.exists");
+			}
+			if (!result.isError()) {
+				service.update(section);
+			}
+		} else {
+			if (sectionName == null || sectionName.length() == 0) {
+				result.put("sectionName", "message.required");
+			}
+			List<Section> finded = service.listBySectionName(sectionName);
+			if (finded.size() > 0) {
+				result.put("sectionName", "message.exists");
 			}
 			if (!result.isError()) {
 				service.insert(section);
@@ -60,8 +74,9 @@ public class SectionPage extends BasePage {
 	@ActionPath
 	@Ajax
 	public Navigation delete(@Form Section section, ErrorInfo info) {
+		JsonResult result = new JsonResult();
 		service.delete(section.getId());
-		return Json.convert(section);
+		return Json.convert(result);
 	}
 
 	@GET

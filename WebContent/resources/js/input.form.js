@@ -92,6 +92,7 @@ InputForm.prototype = {
 	 */
 	'showAddForm' : function() {
 		$('#deleteButton').css('display', 'none');
+		$('.message').text('');
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
 			$('#' + this.fields[i]).val('');
@@ -106,6 +107,7 @@ InputForm.prototype = {
 	 */
 	'showEditForm' : function(id) {
 		$('#deleteButton').css('display', 'inline');
+		$('.message').text('');
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
 			$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
