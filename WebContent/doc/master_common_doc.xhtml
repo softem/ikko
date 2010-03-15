@@ -2,8 +2,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
 	xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -14,134 +12,126 @@ th {
 </style>
 </head>
 <body>
+	<h2>マスタの一覧・入力画面の共通仕様</h2>
+	<hr size="2" width="100%" align="left" ></hr>
+	<h3>概要</h3>
+	<p>　各マスタの一覧画面、及び、入力画面の共通仕様を定義する。</p>
+	<br></br>
+	<h3>項目定義</h3>
+	<table border="1">
+		<caption>一覧画面</caption>
+		<tr>
+			<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
+		</tr>
+		<tr>
+			<td>1</td><td>ヘッダ</td><td>プロジェクトコード</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+		</tr>
+		<tr>
+			<td>2</td><td>ヘッダ</td><td>タイトル</td><td>ラベル</td>	<td>O</td><td>-</td><td>各マスタの一覧画面名を表示する</td>
+		</tr>
+		<tr>
+			<td>3</td><td>ヘッダ</td><td>新規登録</td><td>ボタン</td>	<td>O</td><td>-</td><td></td>
+		</tr>
+		<tr>
+			<td>4</td><td>ヘッダ</td><td>メインメニューへ戻る</td><td>リンク</td><td>O</td><td></td><td></td>
+		</tr>
+		<tr>
+			<td>5</td><td>フッタ</td><td>CopyRight</td><td>ラベル</td><td>O</td><td></td><td></td>
+		</tr>
+	</table>
+	<p>※一覧画面の一覧部については、各マスタの一覧画面を参照</p>
+	
+	<br></br>
 
-	<ui:define name="doc">
-		<h2>マスタの一覧・入力画面の共通仕様</h2>
-		<hr size="2" width="100%" align="left" ></hr>
-		<h3>概要</h3>
-		<p>　各マスタの一覧画面、及び、入力画面の共通仕様を定義する。</p>
-		<br></br>
-		<h3>項目定義</h3>
-		<table border="1">
-			<caption>一覧画面</caption>
+	<table border="1">
+		<caption>入力画面</caption>
+		<tr>
+			<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>Ｉ/Ｏ</th><th>桁数</th><th>備考</th>
+		</tr>
+		<tr>
+			<td>1</td><td>-</td><td>保存</td><td>ボタン</td><td>O</td><td>-</td><td></td>
+		</tr>
+		<tr>
+			<td>2</td><td>-</td><td>削除</td><td>ボタン</td><td>O</td><td>-</td><td></td>
+		</tr>
+		<tr>
+			<td>3</td><td>-</td><td>閉じる</td><td>ボタン</td><td>O</td><td>-</td><td></td>
+		</tr>
+	</table>
+	<p>※入力画面の入力項目については、各マスタの入力画面を参照</p>
+	
+	<br></br>
+	<h3>入力チェック</h3>
+	<table border="1">
+		<tr>
+			<th>No</th><th width="100">契機</th><th width="150">項目名</th><th width="50">分類</th><th>仕様</th><th>エラー時の動作</th>
+		</tr>
+		<tr>
+			<td>1</td><td>保存ボタン</td><td>-</td><td>存在</td><td>更新時に該当データが存在しない場合</td><td>「更新対象のデータがありません。」と表示する</td>
+		</tr>
 			<tr>
-				<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
-			</tr>
-			<tr>
-				<td>1</td><td>ヘッダ</td><td>プロジェクトコード</td><td>ラベル</td><td>O</td><td>-</td><td></td>
-			</tr>
-			<tr>
-				<td>2</td><td>ヘッダ</td><td>タイトル</td><td>ラベル</td>	<td>O</td><td>-</td><td>各マスタの一覧画面名を表示する</td>
-			</tr>
-			<tr>
-				<td>3</td><td>ヘッダ</td><td>新規登録</td><td>ボタン</td>	<td>O</td><td>-</td><td></td>
-			</tr>
-			<tr>
-				<td>4</td><td>ヘッダ</td><td>メインメニューへ戻る</td><td>リンク</td><td>O</td><td></td><td></td>
-			</tr>
-			<tr>
-				<td>5</td><td>フッタ</td><td>CopyRight</td><td>ラベル</td><td>O</td><td></td><td></td>
-			</tr>
-		</table>
-		<p>※一覧画面の一覧部については、各マスタの一覧画面を参照</p>
-		
-		<br></br>
-
-		<table border="1">
-			<caption>入力画面</caption>
-			<tr>
-				<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>Ｉ/Ｏ</th><th>桁数</th><th>備考</th>
-			</tr>
-			<tr>
-				<td>1</td><td>-</td><td>保存</td><td>ボタン</td><td>O</td><td>-</td><td></td>
-			</tr>
-			<tr>
-				<td>2</td><td>-</td><td>削除</td><td>ボタン</td><td>O</td><td>-</td><td></td>
-			</tr>
-			<tr>
-				<td>3</td><td>-</td><td>閉じる</td><td>ボタン</td><td>O</td><td>-</td><td></td>
-			</tr>
-		</table>
-		<p>※入力画面の入力項目については、各マスタの入力画面を参照</p>
-		
-		<br></br>
-
-		<h3>入力チェック</h3>
-		<table border="1">
-			<tr>
-				<th>No</th><th width="100">契機</th><th width="150">項目名</th><th width="50">分類</th><th>仕様</th><th>エラー時の動作</th>
-			</tr>
-			<tr>
-				<td>1</td><td>保存ボタン</td><td>-</td><td>存在</td><td>更新時に該当データが存在しない場合</td><td>「更新対象のデータがありません。」と表示する</td>
-			</tr>
-			<tr>
-				<td>2</td><td>削除ボタン</td><td>-</td><td>存在</td><td>削除時に該当データが存在しない場合</td><td>「削除対象のデータがありません。」と表示する</td>
-			</tr>
-		</table>
-		<p>※その他のチェックは、各マスタの一覧画面の入力チェックを参照</p>
+			<td>2</td><td>削除ボタン</td><td>-</td><td>存在</td><td>削除時に該当データが存在しない場合</td><td>「削除対象のデータがありません。」と表示する</td>
+		</tr>
+	</table>
+	<p>※その他のチェックは、各マスタの一覧画面の入力チェックを参照</p>
 			
-		<br></br>
+	<br></br>
 
-		<h3>アクション</h3>
-		<table border="1">
-			<caption>イベント一覧</caption>
-			<tr>
-				<th>No</th><th>イベント</th><th>イベント内容</th><th>備考</th>
-			</tr>
-			<tr>
-				<td>1</td><td>新規登録ボタン</td><td>入力画面を表示する</td><td></td>
-			</tr>
-			<tr>
-				<td>2</td><td>編集ボタン</td><td>入力画面を表示する</td><td></td>
-			</tr>
-			<tr>
-				<td>3</td><td>保存ボタン</td><td>入力画面の入力内容を登録・更新する</td>
-				<td><ul><li>登録・更新後、一覧に入力内容を反映する</li></ul></td>
-			</tr>
-			<tr>
-				<td>4</td><td>削除ボタン</td><td>入力画面にて、該当のデータを削除する</td>
-				<td><ul><li>削除ボタン押下時は、削除確認のポップアップを表示する</li><li>データの削除は、論理削除とする</li><li>削除後、一覧より該当のデータを削除する</li></ul></td>
-			</tr>
-			<tr>
-				<td>5</td><td>閉じるボタン</td><td>入力画面を閉じる</td><td></td>
-			</tr>
-			<tr>
-				<td>6</td><td>メインメニューへ戻る</td><td>メインメニュー画面に遷移する</td><td></td>
-			</tr>
-		</table>
+	<h3>アクション</h3>
+	<table border="1">
+		<caption>イベント一覧</caption>
+		<tr>
+			<th>No</th><th>イベント</th><th>イベント内容</th><th>備考</th>
+		</tr>
+		<tr>
+			<td>1</td><td>新規登録ボタン</td><td>入力画面を表示する</td><td></td>
+		</tr>
+		<tr>
+			<td>2</td><td>編集ボタン</td><td>入力画面を表示する</td><td></td>
+		</tr>
+		<tr>
+			<td>3</td><td>保存ボタン</td><td>入力画面の入力内容を登録・更新する</td>
+			<td><ul><li>登録・更新後、一覧に入力内容を反映する</li></ul></td>
+		</tr>
+		<tr>
+			<td>4</td><td>削除ボタン</td><td>入力画面にて、該当のデータを削除する</td>
+			<td><ul><li>削除ボタン押下時は、削除確認のポップアップを表示する</li><li>データの削除は、論理削除とする</li><li>削除後、一覧より該当のデータを削除する</li></ul></td>
+		</tr>
+		<tr>
+			<td>5</td><td>閉じるボタン</td><td>入力画面を閉じる</td><td></td>
+		</tr>
+		<tr>
+			<td>6</td><td>メインメニューへ戻る</td><td>メインメニュー画面に遷移する</td><td></td>
+		</tr>
+	</table>
+	<br></br>
 
-		<br></br>
+	<table border="1">
+		<caption>画面制御</caption>			
+		<tr><th>ボタン</th><th>一覧画面表示時</th><th>入力画面(新規登録時)</th><th>入力画面(更新・削除時)</th></tr>
+		<tr><td>新規登録</td><td>活性</td><td>非活性</td><td>非活性</td></tr>
+		<tr><td>編集</td><td>活性</td><td>非活性</td><td>非活性</td></tr>
+		<tr><td>保存</td><td>表示なし</td><td>活性</td><td>活性</td></tr>
+		<tr><td>削除</td><td>表示なし</td><td>活性</td><td>表示なし</td></tr>
+		<tr><td>閉じる</td><td>表示なし</td><td>活性</td><td>活性</td></tr>
+	</table>
+	<br></br>
+	<h3>その他</h3>
+	<ul>
+		<li>入力画面は、ポップアップ表示とする。</li>
+		<li>入力画面の表示位置は、ブラウザの中央固定とする。</li>
+	</ul>
+	<br></br>
 
-		<table border="1">
-			<caption>画面制御</caption>			
-			<tr><th>ボタン</th><th>一覧画面表示時</th><th>入力画面(新規登録時)</th><th>入力画面(更新・削除時)</th></tr>
-			<tr><td>新規登録</td><td>活性</td><td>非活性</td><td>非活性</td></tr>
-			<tr><td>編集</td><td>活性</td><td>非活性</td><td>非活性</td></tr>
-			<tr><td>保存</td><td>表示なし</td><td>活性</td><td>活性</td></tr>
-			<tr><td>削除</td><td>表示なし</td><td>活性</td><td>表示なし</td></tr>
-			<tr><td>閉じる</td><td>表示なし</td><td>活性</td><td>活性</td></tr>
-		</table>
-
-		<br></br>
-
-		<h3>その他</h3>
-		<ul>
-			<li>入力画面は、ポップアップ表示とする。</li>
-			<li>入力画面の表示位置は、ブラウザの中央固定とする。</li>
-		</ul>
-
-		<br></br>
-
-		<h3>検討事項</h3>
-		<ul>
-			<li>部署入力画面で削除されたデータ（論理削除）を復活させる機能を追加するか否か。
-		    (部署入力画面で削除フラグを管理対象に追加するか否か）
-		    </li>
-			<li>存在チェックのメッセージ表示について、項目名の横に出すか、
+	<h3>検討事項</h3>
+	<ul>
+		<li>部署入力画面で削除されたデータ（論理削除）を復活させる機能を追加するか否か。
+	    (部署入力画面で削除フラグを管理対象に追加するか否か）
+	    </li>
+		<li>存在チェックのメッセージ表示について、項目名の横に出すか、
 			ポップアップ表示にするかは、保留とする。
-			</li>
-		</ul>
-		<h3></h3>
-	</ui:define>
+		</li>
+	</ul>
+	<h3></h3>
 </body>
 </html>
