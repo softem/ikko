@@ -67,6 +67,7 @@ width:auto;
 }
 
 label {
+font-weight:bold;
 display:block;
 }
 
@@ -83,7 +84,7 @@ text-align:left;
 }
 
 #inputForm div {
-margin-bottom:.5em;
+margin-bottom:1em;
 }
 
 #loginForm {

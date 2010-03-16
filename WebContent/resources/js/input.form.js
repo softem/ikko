@@ -27,13 +27,14 @@ function execBlockUI() {
 	$.blockUI({
 		message: $('#inputForm'),
 		css: {
-			top:'1em',
-			width: 'auto',
-			border: '2px solid #666',
-			padding: '1em',
-			backgroundColor: '#fff',
-			'-webkit-border-radius': '10px',
-			'-moz-border-radius': '10px',
+			top:'30px',
+			height:'22em',
+			width:'auto',
+			overflow:'auto',
+			border:'2px solid #666',
+			padding:'1em 2em 1em 1em',
+			color:'#333',
+			backgroundColor:'#fff',
 			opacity: .9
 		}
 	});
@@ -44,23 +45,21 @@ function execBlockUI() {
  * 
  * @param table
  * 	          編集対象のテーブル名
- * @param fields
- *            編集対象のフィールド名の配列
  */
-function InputForm(name, fields) {
+function InputForm(name) {
 	this.tableName = name;
-	this.fields = fields;
 };
 
 InputForm.prototype = {
 
 	'init' : function() {
-		var name = this.tableName;
+		$('table.dataTable tr:even').css('background-color', '#eee');
 
-		$("#inputForm").ajaxComplete(function(event, XMLHttpRequest, options){
+		$('#inputForm').ajaxComplete(function(event, XMLHttpRequest, options){
 			$('.formButton').removeAttr('disabled');
 		});
 
+		var name = this.tableName;
 	    $('#saveButton').click(function() {
 			$('.formButton').attr('disabled', true);
 			$('#inputForm').ajaxSubmit({
@@ -94,10 +93,15 @@ InputForm.prototype = {
 	'showAddForm' : function() {
 		$('#deleteButton').css('display', 'none');
 		$('.message').text('');
-		var i = 0;
-		for(i = 0; i < this.fields.length; i++) {
-			$('#' + this.fields[i]).val('');
-		}
+		$('#inputForm :input').filter(':enabled').each(function() {
+			var name = $(this).attr('name');
+			var type = $(this).attr('type');
+			if (type == 'checkbox') {
+				$(this).removeAttr('checked');
+			} else if (type != 'button') {
+				$(this).val('');
+			}
+		});
 		execBlockUI();
 	},
 
@@ -109,14 +113,22 @@ InputForm.prototype = {
 	'showEditForm' : function(id) {
 		$('#deleteButton').css('display', 'inline');
 		$('.message').text('');
-		var i = 0;
-		for(i = 0; i < this.fields.length; i++) {
-			if ($('#' + this.fields[i] + id).attr('type') == undefined) {
-				$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
-			} else {
-				$('#' + this.fields[i]).val($('#' + this.fields[i] + id).val());
+		$('#inputForm :input').filter(':enabled').each(function() {
+			var name = $(this).attr('name');
+			var type = $(this).attr('type');
+			var val = $(this).val();
+			var srcType = $('#' + name + id).attr('type');
+			var srcVal = (srcType == undefined) ? $('#' + name + id).text() : $('#' + name + id).val();
+			if (type == 'checkbox') {
+				if (val == srcVal) {
+					$(this).attr('checked', 'checked');
+				} else {
+					$(this).removeAttr('checked');
+				}
+			} else if (type != 'button') {
+				$(this).val(srcVal);
 			}
-		}
+		});
 		execBlockUI();
 	}
 

@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript">
-var inputForm = new InputForm('project', new Array('id', 'projectCode', 'projectName', 'workPlace', 'flexFlag', 'coreTimeStart', 'coreTimeFinish', 'unitMinute', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'fixStartTime', 'fixFinishTime', 'afterFixStartTime', 'afterFixFinishTime'));
+var inputForm = new InputForm('project');
 $(function() {
-	$('table.dataTable tr:even').css('background-color', '#eee');
 	inputForm.init();
 });
 </script>
@@ -12,21 +11,21 @@ $(function() {
 </div>
 
 <form id="inputForm" method="post" onsubmit="return false;">
-	<div style="float:left">
+	<div>
 		<label for="projectCode">プロジェクトコード<span id="projectCodeMessage" class="message"></span></label>
 		<input type="text" id="projectCode" name="projectCode" size="22" maxlength="20"  style="margin-right:6px"/>
 	</div>
-	<div style="float:left">
+	<div>
  		<label for="projectName">プロジェクト名<span id="projectNameMessage" class="message"></span></label>
 		<input type="text" id="projectName" name="projectName" size="22" maxlength="20"  style="margin-right:6px"/>
 	</div>
-	<div style="float:left">
+	<div>
 		<label for="workPlace">作業場所<span id="workPlaceMessage" class="message"></span></label>
 		<input type="text" id="workPlace" name="workPlace" size="22" maxlength="20" />
 	</div>
-	<div style="clear:left">
-		<input type="checkbox" id="flexFlag" name="flexFlag" />
-		<label style="display:inline;height:1.1em;" for="flexFlag">フレックスフラグ<span id="flexFlagMessage" class="message"></span></label>
+	<div>
+		<input type="checkbox" id="flexFlag" name="flexFlag" value="true" />
+		<label style="display:inline;height:1.1em;" for="flexFlag">フレックス<span id="flexFlagMessage" class="message"></span></label>
 	</div>
 	<div style="float:left">
 		<label for="coreTimeStart">コアタイム開始～終了<span id="coreTimeStartMessage" class="message"></span></label>
@@ -38,7 +37,7 @@ $(function() {
 		<input type="text" id="unitMinute" name="unitMinute" size="2" maxlength="2" />
 	</div>
 	<div style="clear:both">
-		<label>出勤／休日指定　 ※0:出勤　1:その他休日　2:法定休日</label>
+		<label>出勤／休日指定 ※0:出勤 1:その他休日 2:法定休日</label>
 	</div>
 	<div style="float:left">
 		<label for="monday">月<span id="mondayMessage" class="message"></span></label>

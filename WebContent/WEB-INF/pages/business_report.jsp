@@ -1,10 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript">
-var inputForm = new InputForm('business_report', new Array(
-	'id', 'project', 'attendanceKind', 'startTime', 'finishTime', 'comment', 'outStartTime', 'outFinishTime'
-));
+var inputForm = new InputForm('business_report');
 $(function() {
-	$('table.dataTable tr:even').css('background-color', '#eee');
 	inputForm.init();
 });
 </script>

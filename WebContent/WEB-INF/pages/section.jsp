@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript">
-var inputForm = new InputForm('section', new Array('id', 'sectionName'));
+var inputForm = new InputForm('section');
 $(function() {
-	$('table.dataTable tr:even').css('background-color', '#eee');
 	inputForm.init();
 });
 </script>
