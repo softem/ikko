@@ -62,8 +62,8 @@ height:30px;
 /* --CUSTOM-- */
 
 #wrapper {
-margin:20px 0 0 30px;
-width:780px;
+margin:20px 30px 0 30px;
+width:auto;
 }
 
 label {
@@ -104,7 +104,12 @@ width:260px;
 
 #local-menu {
 float:right;
+margin-bottom:1.5em;
 text-align:right;
+}
+
+#local-menu a {
+margin-left:1em;
 }
 
 .message {
@@ -114,4 +119,8 @@ margin-bottom:1em;
 
 .ime {
 ime-mode:disabled;
+}
+
+#results {
+clear:both;
 }

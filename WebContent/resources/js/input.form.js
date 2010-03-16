@@ -27,6 +27,7 @@ function execBlockUI() {
 	$.blockUI({
 		message: $('#inputForm'),
 		css: {
+			top: '1em',
 			width: 'auto',
 			border: '2px solid #666',
 			padding: '1em',
@@ -54,12 +55,13 @@ function InputForm(name, fields) {
 InputForm.prototype = {
 
 	'init' : function() {
-		var name = this.tableName;
+		$('table.dataTable tr:even').css('background-color', '#eee');
 
 		$("#inputForm").ajaxComplete(function(event, XMLHttpRequest, options){
 			$('.formButton').removeAttr('disabled');
 		});
 
+		var name = this.tableName;
 	    $('#saveButton').click(function() {
 			$('.formButton').attr('disabled', true);
 			$('#inputForm').ajaxSubmit({
@@ -108,9 +110,14 @@ InputForm.prototype = {
 	'showEditForm' : function(id) {
 		$('#deleteButton').css('display', 'inline');
 		$('.message').text('');
+		var value = '';
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
-			$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
+			value = $('#' + this.fields[i] + id).text();
+			if ($('#' + this.fields[i] + id).attr('type') != undefined) {
+				value = $('#' + this.fields[i] + id).val();
+			}
+			$('#' + this.fields[i]).val(String(value));
 		}
 		execBlockUI();
 	}
