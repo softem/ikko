@@ -4,12 +4,13 @@ var inputForm = new InputForm('business_report', new Array(
 	'id', 'project', 'attendanceKind', 'startTime', 'finishTime', 'comment', 'outStartTime', 'outFinishTime'
 ));
 $(function() {
+	$('table.dataTable tr:even').css('background-color', '#eee');
 	inputForm.init();
 });
 </script>
 
 <div id="local-menu">
-	<a href="/business_report/${prev}">前月へ移動</a>
+	<a href="/ikko/business_report/${prev}">前月へ移動</a>
 	<a href="${t:url("/business_report")}">当月に戻る</a>
 	<a href="/ikko/business_report/${next}">次月へ移動</a>
 	<a href="${t:url("/welcome/main")}">メインメニューへ戻る</a>

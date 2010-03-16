@@ -111,7 +111,11 @@ InputForm.prototype = {
 		$('.message').text('');
 		var i = 0;
 		for(i = 0; i < this.fields.length; i++) {
-			$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
+			if ($('#' + this.fields[i] + id).attr('type') == undefined) {
+				$('#' + this.fields[i]).val($('#' + this.fields[i] + id).text());
+			} else {
+				$('#' + this.fields[i]).val($('#' + this.fields[i] + id).val());
+			}
 		}
 		execBlockUI();
 	}
