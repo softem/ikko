@@ -25,7 +25,7 @@ $(function() {
 		<input type="text" id="workPlace" name="workPlace" size="22" maxlength="20" />
 	</div>
 	<div style="clear:left">
-		<input type="checkbox" id="flexFlag" name="flexFlag" >
+		<input type="checkbox" id="flexFlag" name="flexFlag" />
 		<label style="display:inline;height:1.1em;" for="flexFlag">フレックスフラグ<span id="flexFlagMessage" class="message"></span></label>
 	</div>
 	<div style="float:left">

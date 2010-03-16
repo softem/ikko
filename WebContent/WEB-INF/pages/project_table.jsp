@@ -27,7 +27,7 @@
 			<td id="projectCode${item.id}">${item.projectCode}</td>
 			<td id="projectName${item.id}">${item.projectName}</td>
 			<td id="workPlace${item.id}">${item.workPlace}</td>
-			<td id="flexFlag${item.id}">
+			<td>
 				<c:choose>
 					<c:when test="${item.flexFlag}">有</c:when>
 					<c:otherwise>無</c:otherwise>
@@ -44,6 +44,7 @@
 		</tr>
 	<c:if test="${status.last}">
 	</table>
+	<input type="hidden" id="flexFlag${item.id}" value="${item.flexFlag}"/>
 	<div style="display:none" id="monday${item.id}">${item.monday}</div>
 	<div style="display:none" id="tuesday${item.id}">${item.tuesday}</div>
 	<div style="display:none" id="wednesday${item.id}">${item.wednesday}</div>
