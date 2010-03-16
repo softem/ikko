@@ -32,12 +32,12 @@ $(function() {
 
 <hr size="2" width="100%" align="left" ></hr>
 <h3>概要</h3>
-<p>　部署一覧画面、及び、部署入力画面より部署マスタのデータの管理（登録・更新・削除）を行う。</p>
+<p>　部署マスタ一覧画面、及び、部署マスタ入力画面より部署マスタの管理（登録・更新・削除）を行う。</p>
 <br></br>
 
 <h3>項目定義</h3>
 <table border="1">
-	<caption>部署一覧画面</caption>
+	<caption>部署マスタ一覧画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
 	</tr>
@@ -55,7 +55,7 @@ $(function() {
 <br></br>
 
 <table border="1">
-	<caption>部署入力画面</caption>
+	<caption>部署マスタ入力画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>Ｉ/Ｏ</th><th>桁数</th><th>備考</th>
 	</tr>

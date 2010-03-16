@@ -27,6 +27,7 @@ function execBlockUI() {
 	$.blockUI({
 		message: $('#inputForm'),
 		css: {
+			top:'1em',
 			width: 'auto',
 			border: '2px solid #666',
 			padding: '1em',
