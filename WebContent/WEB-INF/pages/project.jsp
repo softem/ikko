@@ -13,15 +13,15 @@ $(function() {
 <form id="inputForm" method="post" onsubmit="return false;">
 	<div>
 		<label for="projectCode">プロジェクトコード<span id="projectCodeMessage" class="message"></span></label>
-		<input type="text" id="projectCode" name="projectCode" size="22" maxlength="20"  style="margin-right:6px"/>
+		<input type="text" id="projectCode" name="projectCode" size="35" maxlength="20"  style="margin-right:6px"/>
 	</div>
 	<div>
  		<label for="projectName">プロジェクト名<span id="projectNameMessage" class="message"></span></label>
-		<input type="text" id="projectName" name="projectName" size="22" maxlength="20"  style="margin-right:6px"/>
+		<input type="text" id="projectName" name="projectName" size="35" maxlength="20"  style="margin-right:6px"/>
 	</div>
 	<div>
 		<label for="workPlace">作業場所<span id="workPlaceMessage" class="message"></span></label>
-		<input type="text" id="workPlace" name="workPlace" size="22" maxlength="20" />
+		<input type="text" id="workPlace" name="workPlace" size="35" maxlength="20" />
 	</div>
 	<div>
 		<input type="checkbox" id="flexFlag" name="flexFlag" value="true" />
@@ -37,7 +37,8 @@ $(function() {
 		<input type="text" id="unitMinute" name="unitMinute" size="2" maxlength="2" />
 	</div>
 	<div style="clear:both">
-		<label>出勤／休日指定 ※0:出勤 1:その他休日 2:法定休日</label>
+		<label>出勤／休日指定</label>
+		<label>（0:出勤 1:その他休日 2:法定休日）</label>
 	</div>
 	<div style="float:left">
 		<label for="monday">月<span id="mondayMessage" class="message"></span></label>
@@ -107,10 +108,40 @@ $(function() {
 		<td>1</td><td>一覧部</td><td>ID</td><td>テキスト</td><td>O</td><td>11</td><td></td>
 	</tr>
 	<tr>
-		<td>2</td><td>一覧部</td><td>プロジェクト名</td><td>テキスト</td><td>O</td><td>40</td><td></td>
+		<td>2</td><td>一覧部</td><td>プロジェクトコード</td><td>テキスト</td><td>O</td><td>20</td><td></td>
 	</tr>
 	<tr>
-		<td>3</td><td>一覧部</td><td>操作</td><td>ボタン</td><td>O</td><td>-</td>	<td></td>
+		<td>3</td><td>一覧部</td><td>プロジェクト名</td><td>テキスト</td><td>O</td><td>20</td><td></td>
+	</tr>
+	<tr>
+		<td>4</td><td>一覧部</td><td>作業場所</td><td>テキスト</td><td>O</td><td>20</td><td></td>
+	</tr>
+	<tr>
+		<td>5</td><td>一覧部</td><td>Flex</td><td>テキスト</td><td>O</td><td>1</td><td></td>
+	</tr>
+	<tr>
+		<td>6</td><td>一覧部</td><td>コアタイム開始</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>7</td><td>一覧部</td><td>コアタイム終了</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>8</td><td>一覧部</td><td>単位時間（分）</td><td>テキスト</td><td>O</td><td>2</td><td></td>
+	</tr>
+	<tr>
+		<td>9</td><td>一覧部</td><td>定時間開始</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>10</td><td>一覧部</td><td>定時間終了</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>11</td><td>一覧部</td><td>定時間後勤務開始</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>12</td><td>一覧部</td><td>前日勤務終了</td><td>テキスト</td><td>O</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>13</td><td>一覧部</td><td>操作</td><td>ボタン</td><td>O</td><td>-</td><td></td>
 	</tr>
 </table>
 <p>※ヘッダ部、フッタ部については、マスタの一覧・入力画面の共通仕様を参照。</p>
@@ -122,10 +153,76 @@ $(function() {
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>Ｉ/Ｏ</th><th>桁数</th><th>備考</th>
 	</tr>
 	<tr>
-		<td>1</td><td>入力部</td><td>プロジェクト名</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+		<td>1</td><td>入力部</td><td>プロジェクトコード</td><td>ラベル</td><td>O</td><td>-</td><td></td>
 	</tr>
 	<tr>
-		<td>2</td><td>入力部</td><td>プロジェクト名入力エリア</td><td>テキストボックス</td><td>I</td><td>40</td><td></td>
+		<td>2</td><td>入力部</td><td>プロジェクトコード入力エリア</td><td>テキストボックス</td><td>I</td><td>20</td><td></td>
+	</tr>
+	<tr>
+		<td>3</td><td>入力部</td><td>プロジェクト名</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>4</td><td>入力部</td><td>プロジェクト名入力エリア</td><td>テキストボックス</td><td>I</td><td>20</td><td></td>
+	</tr>
+	<tr>
+		<td>5</td><td>入力部</td><td>作業場所</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>6</td><td>入力部</td><td>作業場所入力エリア</td><td>テキストボックス</td><td>I</td><td>20</td><td></td>
+	</tr>
+	<tr>
+		<td>7</td><td>入力部</td><td>フレックスフラグチェックエリア</td><td>チェックボックス</td><td>I</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>8</td><td>入力部</td><td>フレックスフラグ</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>9</td><td>入力部</td><td>コアタイム開始～終了</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>10</td><td>入力部</td><td>コアタイム開始入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>12</td><td>入力部</td><td>～</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>12</td><td>入力部</td><td>コアタイム終了入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>13</td><td>入力部</td><td>出勤／休日指定</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>14</td><td>入力部</td><td>（0:出勤 1:その他休日 2:法定休日）</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>15</td><td>入力部</td><td>曜日</td><td>ラベル</td><td>O</td><td>-</td><td>月曜日～日曜日を表示する</td>
+	</tr>
+	<tr>
+		<td>16</td><td>入力部</td><td>出勤／休日指定入力エリア</td><td>テキストボックス</td><td>I</td><td>1</td><td>月曜日～日曜日分を表示する</td>
+	</tr>
+	<tr>
+		<td>17</td><td>入力部</td><td>定時間開始～終了</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>18</td><td>入力部</td><td>定時間開始入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>19</td><td>入力部</td><td>～</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>20</td><td>入力部</td><td>定時間終了入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>17</td><td>入力部</td><td>定時間後勤務開始～前日継続終了</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>18</td><td>入力部</td><td>定時間後開始入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
+	</tr>
+	<tr>
+		<td>19</td><td>入力部</td><td>～</td><td>ラベル</td><td>O</td><td>-</td><td></td>
+	</tr>
+	<tr>
+		<td>20</td><td>入力部</td><td>前日継続終了入力エリア</td><td>テキストボックス</td><td>I</td><td>4</td><td></td>
 	</tr>
 </table>
 <p>※保存、削除、閉じるボタンについては、マスタの一覧・入力画面の共通仕様を参照。</p>
