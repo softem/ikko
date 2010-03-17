@@ -16,6 +16,7 @@
  */
 package jp.co.softem.ikko.service;
 
+
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -24,31 +25,31 @@ import org.t2framework.t2.action.ErrorInfo;
 import org.t2framework.t2.navigation.Json;
 
 import jp.co.softem.ikko.core.JsonResult;
-import jp.co.softem.ikko.eis.Project;
+import jp.co.softem.ikko.eis.CommuterTicket;
 
 /**
- * プロジェクトマスタ用のDAOクラスです。
+ * 定期代トラン用のDAOクラスです。
  * 
  * @author kazunari
  */
 @Stateless
-public class ProjectService extends BaseService<Project, Integer> {
+public class CommuterTicketService extends BaseService<CommuterTicket, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	public ProjectService() {
-		super(Project.class);
+	public CommuterTicketService() {
+		super(CommuterTicket.class);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Project> listBySectionName(String sectionName) {
+	public List<CommuterTicket> listBySectionName(String sectionName) {
 		return em.createQuery(
 				"select e from Section e where e.sectionName = :sectionName and e.deleteFlag = 0")
 				.setParameter("sectionName", sectionName).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Project> listBySectionName(int id, String sectionName) {
+	public List<CommuterTicket> listBySectionName(int id, String sectionName) {
 		return em
 				.createQuery(
 						"select e from Section e where e.id <> :id and e.sectionName = :sectionName and e.deleteFlag = 0")
@@ -56,7 +57,7 @@ public class ProjectService extends BaseService<Project, Integer> {
 				.setParameter("sectionName", sectionName).getResultList();
 	}
 
-	public JsonResult save(Project project, ErrorInfo info) {
+	public JsonResult save(CommuterTicket commuterTicket, ErrorInfo info) {
 		JsonResult result = new JsonResult();
 /*
 		int id = project.getId();
@@ -71,7 +72,7 @@ public class ProjectService extends BaseService<Project, Integer> {
 			}
 			if (!result.isError()) {
 				this.update(project);
-			}
+			}project
 		} else {
 			if (projectName == null || projectName.length() == 0) {
 				result.put("projectName", "message.required");
@@ -85,14 +86,14 @@ public class ProjectService extends BaseService<Project, Integer> {
 			}
 		}
 */
-		this.insert(project);
+		this.insert(commuterTicket);
 		return result;
 		
 	}
 
-	public JsonResult deleteLogical(Project project, ErrorInfo info) {
+	public JsonResult deleteLogical(CommuterTicket commuterTicket, ErrorInfo info) {
 		JsonResult result = new JsonResult();
-		this.delete(project.getId());
+		this.delete(commuterTicket.getId());
 		return result;
 	}
 }

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <ul class="main-menu">
 	<li><a href="${t:url("/business_report")}">業務日報</a></li>
-	<li>定期代申請</li>
+	<li><a href="${t:url("/commuter_ticket")}">定期代申請</a></li>
 	<li><a href="${t:url("/welcome/logout")}">ログアウト</a></li>
 </ul>
 <ul class="main-menu">
