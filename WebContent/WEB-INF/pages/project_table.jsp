@@ -45,12 +45,12 @@
 	<c:if test="${status.last}">
 	</table>
 	<input type="hidden" id="flexFlag${item.id}" value="${item.flexFlag}"/>
-	<div style="display:none" id="monday${item.id}">${item.monday}</div>
-	<div style="display:none" id="tuesday${item.id}">${item.tuesday}</div>
-	<div style="display:none" id="wednesday${item.id}">${item.wednesday}</div>
-	<div style="display:none" id="thursday${item.id}">${item.thursday}</div>
-	<div style="display:none" id="friday${item.id}">${item.friday}</div>
-	<div style="display:none" id="saturday${item.id}">${item.saturday}</div>
-	<div style="display:none" id="sunday${item.id}">${item.sunday}</div>
+	<input type="hidden" id="monday${item.id}" value="${item.monday}" />
+	<input type="hidden" id="tuesday${item.id}" value="${item.tuesday}" />
+	<input type="hidden" id="wednesday${item.id}" value="${item.wednesday}" />
+	<input type="hidden" id="thursday${item.id}" value="${item.thursday}" />
+	<input type="hidden" id="friday${item.id}" value="${item.friday}" />
+	<input type="hidden" id="saturday${item.id}" value="${item.saturday}" />
+	<input type="hidden" id="sunday${item.id}" value="${item.sunday}" />
 	</c:if>
 </c:forEach>
