@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import jp.co.softem.ikko.bean.CalendarBean;
 import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.AttendanceKind;
@@ -20,7 +22,7 @@ import jp.co.softem.ikko.service.AttendanceKindService;
 import jp.co.softem.ikko.service.BusinessReportService;
 import jp.co.softem.ikko.service.ProjectService;
 
-import org.t2framework.commons.annotation.composite.RequestScope;
+import org.t2framework.commons.annotation.core.Singleton;
 import org.t2framework.t2.action.ErrorInfo;
 import org.t2framework.t2.annotation.composite.GET;
 import org.t2framework.t2.annotation.composite.POST;
@@ -35,7 +37,7 @@ import org.t2framework.t2.navigation.Forward;
 import org.t2framework.t2.navigation.Json;
 import org.t2framework.t2.spi.Navigation;
 
-@RequestScope
+@Singleton
 @Named
 @Page("business_report")
 public class BusinessReportPage extends BasePage {
@@ -43,12 +45,14 @@ public class BusinessReportPage extends BasePage {
 	@EJB
 	BusinessReportService service;
 
-	
-	
+	@Inject
+	CalendarBean cal;
+
 	@Default
 	@ActionPath("{year}/{month}")
 	public Navigation index(@Var("year") Integer year,
 			@Var("month") Integer month, Request request) {
+		cal.setCurrentCal(Calendar.getInstance());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 		if (year == null || month == null) {
 			Calendar nextCal = Calendar.getInstance();
@@ -59,13 +63,14 @@ public class BusinessReportPage extends BasePage {
 			request.setAttribute("prev", sdf.format(prevCal.getTime()));
 		} else {
 			Calendar nextCal = Calendar.getInstance();
-			nextCal.set(year, month, 1);
+			nextCal.set(year, month - 1, 1);
 			nextCal.add(Calendar.MONTH, 1);
 			request.setAttribute("next", sdf.format(nextCal.getTime()));
 			Calendar prevCal = Calendar.getInstance();
-			prevCal.set(year, month, 1);
+			prevCal.set(year, month - 1, 1);
 			prevCal.add(Calendar.MONTH, -1);
 			request.setAttribute("prev", sdf.format(prevCal.getTime()));
+			cal.getCurrentCal().set(year, month - 1, 1);
 		}
 		pageInfo.setPage("business_report");
 		return Forward.to(TEMPLATE);
@@ -97,6 +102,7 @@ public class BusinessReportPage extends BasePage {
 	public List<BusinessReport> getList() throws ParseException {
 		List<BusinessReport> list = new ArrayList<BusinessReport>();
 		Calendar start = Calendar.getInstance();
+		start.setTime(cal.getCurrentCal().getTime());
 		int max = start.getActualMaximum(Calendar.DATE);
 		start.set(Calendar.DATE, 20);
 		for (int i = 0; i < max; i++) {

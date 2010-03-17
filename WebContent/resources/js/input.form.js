@@ -31,7 +31,7 @@ function execBlockUI() {
 			height:'22em',
 			width:'auto',
 			overflow:'auto',
-			border:'2px solid #666',
+			border:'5px solid #ccc',
 			padding:'1em 2em 1em 1em',
 			color:'#333',
 			backgroundColor:'#fff',
@@ -93,7 +93,7 @@ InputForm.prototype = {
 	'showAddForm' : function() {
 		$('#deleteButton').css('display', 'none');
 		$('.message').text('');
-		$('#inputForm :input').filter(':enabled').each(function() {
+		$('#inputForm :input').each(function() {
 			var name = $(this).attr('name');
 			var type = $(this).attr('type');
 			if (type == 'checkbox') {
@@ -113,11 +113,11 @@ InputForm.prototype = {
 	'showEditForm' : function(id) {
 		$('#deleteButton').css('display', 'inline');
 		$('.message').text('');
-		$('#inputForm :input').filter(':enabled').each(function() {
+		$('#inputForm :input').each(function() {
 			var name = $(this).attr('name');
 			var type = $(this).attr('type');
 			var val = $(this).val();
-			var srcType = $('#' + name + id).attr('type');
+			var srcType = $('#' + name + String(id)).attr('type');
 			var srcVal = (srcType == undefined) ? $('#' + name + id).text() : $('#' + name + id).val();
 			if (type == 'checkbox') {
 				if (val == srcVal) {
