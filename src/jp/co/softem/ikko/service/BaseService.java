@@ -22,6 +22,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import jp.co.softem.ikko.eis.BaseEntity;
+
 /**
  * DAOクラス用の基底クラスです。
  * 
@@ -117,6 +119,8 @@ public abstract class BaseService<T, PK extends Serializable> implements
 	 *            永続化するEntity
 	 */
 	public void insert(T o) {
+		((BaseEntity) o).setCreatedMemberId(0);
+		((BaseEntity) o).setUpdatedMemberId(0);
 		em.persist(o);
 	}
 
@@ -127,6 +131,7 @@ public abstract class BaseService<T, PK extends Serializable> implements
 	 *            更新するEntity
 	 */
 	public void update(T o) {
+		((BaseEntity) o).setUpdatedMemberId(0);
 		em.merge(o);
 	}
 
@@ -138,7 +143,7 @@ public abstract class BaseService<T, PK extends Serializable> implements
 	 */
 	public void delete(PK key) {
 		String sql = "update " + type.getSimpleName()
-				+ " e set e.deleteFlag = 1 where e.id = " + key;
+				+ " e set e.deleteFlag = 1,e.updatedMemberId = 0 where e.id = " + key;
 		em.createQuery(sql).executeUpdate();
 	}
 

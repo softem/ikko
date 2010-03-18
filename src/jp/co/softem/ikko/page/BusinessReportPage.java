@@ -17,9 +17,11 @@ import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.AttendanceKind;
 import jp.co.softem.ikko.eis.BusinessReport;
+import jp.co.softem.ikko.eis.BusinessReportSummary;
 import jp.co.softem.ikko.eis.Project;
 import jp.co.softem.ikko.service.AttendanceKindService;
 import jp.co.softem.ikko.service.BusinessReportService;
+import jp.co.softem.ikko.service.BusinessReportSummaryService;
 import jp.co.softem.ikko.service.ProjectService;
 
 import org.t2framework.commons.annotation.core.Singleton;
@@ -121,10 +123,18 @@ public class BusinessReportPage extends BasePage {
 	}
 
 	@EJB
+	BusinessReportSummaryService businessReportSummaryService;
+
+	public List<BusinessReportSummary> getSummaryList() {
+		return businessReportSummaryService.findAll();
+	}
+
+	@EJB
 	ProjectService projectService;
 
 	public Map<Integer, String> getProject() {
 		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(0, "");
 		List<Project> list = projectService.findAll();
 		for (Project project : list) {
 			map.put(project.getId(), project.getProjectName());
@@ -137,6 +147,7 @@ public class BusinessReportPage extends BasePage {
 
 	public Map<Integer, String> getAttendanceKind() {
 		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(0, "");
 		List<AttendanceKind> list = attendanceKindService.findAll();
 		for (AttendanceKind kind : list) {
 			map.put(kind.getId(), kind.getAttendanceKindName());
