@@ -4,9 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -14,25 +13,19 @@ import javax.inject.Named;
 
 import jp.co.softem.ikko.bean.CalendarBean;
 import jp.co.softem.ikko.core.BasePage;
-import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.BusinessReportSummary;
-import jp.co.softem.ikko.eis.Employee;
 import jp.co.softem.ikko.service.BusinessReportSummaryService;
 import jp.co.softem.ikko.service.EmployeeService;
 
 import org.t2framework.commons.annotation.core.Singleton;
-import org.t2framework.t2.action.ErrorInfo;
 import org.t2framework.t2.annotation.composite.GET;
-import org.t2framework.t2.annotation.composite.POST;
 import org.t2framework.t2.annotation.core.ActionPath;
 import org.t2framework.t2.annotation.core.Ajax;
 import org.t2framework.t2.annotation.core.Default;
-import org.t2framework.t2.annotation.core.Form;
 import org.t2framework.t2.annotation.core.Page;
 import org.t2framework.t2.annotation.core.Var;
 import org.t2framework.t2.contexts.Request;
 import org.t2framework.t2.navigation.Forward;
-import org.t2framework.t2.navigation.Json;
 import org.t2framework.t2.spi.Navigation;
 
 @Singleton
@@ -80,7 +73,12 @@ public class IndividualBusinessReportPage extends BasePage {
 	@GET
 	@Ajax
 	public Navigation table() {
-		return Forward.to("/WEB-INF/pages/individual_business_report_table.jsp");
+		return Forward
+				.to("/WEB-INF/pages/individual_business_report_table.jsp");
+	}
+
+	public Date getTitleDate() {
+		return cal.getCurrentCal().getTime();
 	}
 
 	public List<BusinessReportSummary> getList() throws ParseException {

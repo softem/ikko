@@ -84,7 +84,7 @@ public abstract class BaseService<T, PK extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		String sql = "select e from " + type.getSimpleName()
-				+ " e where e.deleteFlag = 0 order by e.id";
+				+ " e order by e.id";
 		return em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
 	}
 
@@ -107,7 +107,8 @@ public abstract class BaseService<T, PK extends Serializable> implements
 		if (deleteFlag) {
 			return findAll();
 		} else {
-			sql = "select e from " + type.getSimpleName() + " e order by e.id";
+			sql = "select e from " + type.getSimpleName()
+					+ " where e.deleteFlag = 0 and e order by e.id";
 		}
 		return em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
 	}
@@ -143,7 +144,8 @@ public abstract class BaseService<T, PK extends Serializable> implements
 	 */
 	public void delete(PK key) {
 		String sql = "update " + type.getSimpleName()
-				+ " e set e.deleteFlag = 1,e.updatedMemberId = 0 where e.id = " + key;
+				+ " e set e.deleteFlag = 1,e.updatedMemberId = 0 where e.id = "
+				+ key;
 		em.createQuery(sql).executeUpdate();
 	}
 

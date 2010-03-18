@@ -71,27 +71,12 @@ InputForm.prototype = {
 			});
 			return false;
 		});
-
-		$('#deleteButton').click(function() {
-			$('.formButton').attr('disabled', true);
-			if (confirm('本当に削除しますか？')) {
-				$('#inputForm').ajaxSubmit({
-					url: '/ikko/' + name + '/delete',
-					dataType: 'json',
-					success: function(json) {
-						success(json, name);
-					}
-				});
-				return false;
-			}
-		});
 	},
 
 	/**
 	 * 入力フォーム表示(新規登録)
 	 */
 	'showAddForm' : function() {
-		$('#deleteButton').css('display', 'none');
 		$('.message').text('');
 		$('#inputForm :input').each(function() {
 			var name = $(this).attr('name');
@@ -111,7 +96,6 @@ InputForm.prototype = {
 	 * @param id
 	 */
 	'showEditForm' : function(id) {
-		$('#deleteButton').css('display', 'inline');
 		$('.message').text('');
 		$('#inputForm :input').each(function() {
 			var name = $(this).attr('name');

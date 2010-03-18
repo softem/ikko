@@ -140,7 +140,7 @@ public class BusinessReportPage extends BasePage {
 	CommuterTicketService commuterTicketServiceService;
 
 	public List<CommuterTicket> getCommuterTicketList() {
-		return commuterTicketServiceService.findAll(false);
+		return commuterTicketServiceService.findAll();
 	}
 
 	@EJB

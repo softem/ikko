@@ -11,6 +11,7 @@
 			<th rowspan="2">単位時間（分）</th>
 			<th colspan="2">定時間</th>
 			<th colspan="2">定時間後</th>
+			<th rowspan="2">削除</th>
 			<th rowspan="2">操作</th>
 		</tr>
 		<tr>
@@ -40,6 +41,13 @@
 			<td id="fixFinishTime${item.id}">${item.fixFinishTime}</td>
 			<td id="afterFixStartTime${item.id}">${item.afterFixStartTime}</td>
 			<td id="afterFixFinishTime${item.id}">${item.afterFixFinishTime}</td>
+			<td>
+				<c:choose>
+					<c:when test="${item.deleteFlag}">済</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
+				<input type="hidden" id="deleteFlag${item.id}" value="${item.deleteFlag}"/>
+			</td>
 			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 		</tr>
 	<c:if test="${status.last}">

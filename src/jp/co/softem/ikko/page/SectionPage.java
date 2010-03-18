@@ -70,15 +70,6 @@ public class SectionPage extends BasePage {
 		return Json.convert(result);
 	}
 
-	@POST
-	@ActionPath
-	@Ajax
-	public Navigation delete(@Form Section section, ErrorInfo info) {
-		JsonResult result = new JsonResult();
-		service.delete(section.getId());
-		return Json.convert(result);
-	}
-
 	@GET
 	@Ajax
 	public Navigation table() {
