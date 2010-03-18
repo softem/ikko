@@ -120,10 +120,6 @@ public class BusinessReportPage extends BasePage {
 		return list;
 	}
 
-	public BusinessReport getBusinessReport() {
-		return new BusinessReport();
-	}
-
 	@EJB
 	ProjectService projectService;
 
