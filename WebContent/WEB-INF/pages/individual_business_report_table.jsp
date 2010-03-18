@@ -29,7 +29,12 @@
 			<td>${item.harfHolidayTimeSummary}</td>
 			<td>${item.legalHolidayWorkSummary}</td>
 			<td>${item.allOvertimeWorkSummary}</td>
-			<td></td>
+			<td>
+				<c:choose>
+					<c:when test="${item.monthlySeparateFlag}">済</c:when>
+					<c:otherwise>未</c:otherwise>
+				</c:choose>
+			</td>
 		</tr>
 	<c:if test="${status.last}">
 	</table>
