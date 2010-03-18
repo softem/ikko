@@ -16,6 +16,7 @@
  */
 package jp.co.softem.ikko.service;
 
+
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -24,23 +25,23 @@ import org.t2framework.t2.action.ErrorInfo;
 import org.t2framework.t2.navigation.Json;
 
 import jp.co.softem.ikko.core.JsonResult;
-import jp.co.softem.ikko.eis.Project;
+import jp.co.softem.ikko.eis.CommuterTicket;
 
 /**
- * プロジェクトマスタ用のDAOクラスです。
+ * 定期代トラン用のDAOクラスです。
  * 
  * @author kazunari
  */
 @Stateless
-public class ProjectService extends BaseService<Project, Integer> {
+public class CommuterTicketService extends BaseService<CommuterTicket, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
-	public ProjectService() {
-		super(Project.class);
+	public CommuterTicketService() {
+		super(CommuterTicket.class);
 	}
 
-	public JsonResult save(Project project, ErrorInfo info) {
+	public JsonResult save(CommuterTicket commuterTicket, ErrorInfo info) {
 		JsonResult result = new JsonResult();
 		return result;
 		
