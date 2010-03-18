@@ -16,11 +16,11 @@
 		<tr>
 			<td id="id${item.id}">${item.id}</td>
 			<td>
-				<span><fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyy.MM"/></span>
+				<span><fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyy/MM"/></span>
 			</td>
 			<td id="commuterTicketNo${item.id}">${item.commuterTicketNo}</td>
 			<td>
-				<span><fmt:formatDate value="${item.startDate}" pattern="yyyy.MM.dd"/></span>
+				<span><fmt:formatDate value="${item.startDate}" pattern="yyyy/MM/dd"/></span>
 			</td>
 			<td id="lineName${item.id}">${item.lineName}</td>
 			<td id="stationNameStart${item.id}">${item.stationNameStart}</td>

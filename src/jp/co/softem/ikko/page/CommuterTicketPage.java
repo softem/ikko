@@ -80,6 +80,16 @@ public class CommuterTicketPage extends BasePage {
 		commuterTicket.setStationNameEnd("上大岡");
 		commuterTicket.setTicketPrice(11550);
 		list.add(commuterTicket);
+
+		commuterTicket.setId(2);
+		commuterTicket.setCommuterTicketMonth(a.getTime());
+		commuterTicket.setCommuterTicketNo(2);
+		commuterTicket.setStartDate(a.getTime());
+		commuterTicket.setLineName("横浜市営地下鉄");
+		commuterTicket.setStationNameStart("上大岡");
+		commuterTicket.setStationNameEnd("関内");
+		commuterTicket.setTicketPrice(8970);
+		list.add(commuterTicket);
 		
 		return list;
 	}
