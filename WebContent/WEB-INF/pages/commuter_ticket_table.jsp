@@ -15,16 +15,27 @@
 	</c:if>
 		<tr>
 			<td id="id${item.id}">${item.id}</td>
-			<td id="commuterTicketMonth${item.id}">${item.commuterTicketMonth}</td>
+			<td>
+				<span><fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyy.MM"/></span>
+			</td>
 			<td id="commuterTicketNo${item.id}">${item.commuterTicketNo}</td>
-			<td id="startDate${item.id}">${item.startDate}</td>
+			<td>
+				<span><fmt:formatDate value="${item.startDate}" pattern="yyyy.MM.dd"/></span>
+			</td>
 			<td id="lineName${item.id}">${item.lineName}</td>
 			<td id="stationNameStart${item.id}">${item.stationNameStart}</td>
 			<td id="stationNameEnd${item.id}">${item.stationNameEnd}</td>
-			<td id="ticketPrice${item.id}">${item.ticketPrice}</td>
+			<td>
+				<span><fmt:formatNumber value="${item.ticketPrice}" pattern="###,###"/></span>
+			</td>
 			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 		</tr>
 	<c:if test="${status.last}">
 	</table>
+	<input type="hidden" id="commuterTicketMonth${item.id}"
+		value="<fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyyMM"/>">
+	<input type="hidden" id="startDate${item.id}"
+		value="<fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyyMMdd"/>">
+	<input type="hidden" id="ticketPrice${item.id}"	value="${item.ticketPrice}">
 	</c:if>
 </c:forEach>

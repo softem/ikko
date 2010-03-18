@@ -1,6 +1,9 @@
 package jp.co.softem.ikko.page;
 
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,6 +11,7 @@ import javax.inject.Named;
 
 import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.core.JsonResult;
+import jp.co.softem.ikko.eis.BusinessReport;
 import jp.co.softem.ikko.eis.CommuterTicket;
 import jp.co.softem.ikko.service.CommuterTicketService;
 
@@ -62,7 +66,22 @@ public class CommuterTicketPage extends BasePage {
 	}
 
 	public List<CommuterTicket> getList() {
-		return service.findAll();
+		List<CommuterTicket> list = new ArrayList<CommuterTicket>();
+		Calendar a = Calendar.getInstance();
+
+		// TODO:Mock用仮データ
+		CommuterTicket commuterTicket = new CommuterTicket();
+		commuterTicket.setId(1);
+		commuterTicket.setCommuterTicketMonth(a.getTime());
+		commuterTicket.setCommuterTicketNo(1);
+		commuterTicket.setStartDate(a.getTime());
+		commuterTicket.setLineName("京浜急行");
+		commuterTicket.setStationNameStart("北久里浜");
+		commuterTicket.setStationNameEnd("上大岡");
+		commuterTicket.setTicketPrice(11550);
+		list.add(commuterTicket);
+		
+		return list;
 	}
 
 	public CommuterTicket getCommuterTicket() {

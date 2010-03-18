@@ -40,59 +40,9 @@ public class ProjectService extends BaseService<Project, Integer> {
 		super(Project.class);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Project> listBySectionName(String sectionName) {
-		return em.createQuery(
-				"select e from Section e where e.sectionName = :sectionName and e.deleteFlag = 0")
-				.setParameter("sectionName", sectionName).getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Project> listBySectionName(int id, String sectionName) {
-		return em
-				.createQuery(
-						"select e from Section e where e.id <> :id and e.sectionName = :sectionName and e.deleteFlag = 0")
-				.setParameter("id", id)
-				.setParameter("sectionName", sectionName).getResultList();
-	}
-
 	public JsonResult save(Project project, ErrorInfo info) {
 		JsonResult result = new JsonResult();
-/*
-		int id = project.getId();
-		String projectName = project.getSectionName();
-		if (project.getId() > 0) {
-			if (projectName == null || projectName.length() == 0) {
-				result.put("projectName", "message.required");
-			}
-			List<Project> finded = this.listBySectionName(id, projectName);
-			if (finded.size() > 0) {
-				result.put("projectName", "message.exists");
-			}
-			if (!result.isError()) {
-				this.update(project);
-			}
-		} else {
-			if (projectName == null || projectName.length() == 0) {
-				result.put("projectName", "message.required");
-			}
-			List<Project> finded = this.listBySectionName(projectName);
-			if (finded.size() > 0) {
-				result.put("projectName", "message.exists");
-			}
-			if (!result.isError()) {
-				this.insert(project);
-			}
-		}
-*/
-		this.insert(project);
 		return result;
 		
-	}
-
-	public JsonResult deleteLogical(Project project, ErrorInfo info) {
-		JsonResult result = new JsonResult();
-		this.delete(project.getId());
-		return result;
 	}
 }

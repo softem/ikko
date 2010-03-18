@@ -12,16 +12,16 @@ $(function() {
 
 <form id="inputForm" method="post" onsubmit="return false;">
 	<div>
-		<label for="commuterTicketMonth">定期代年月<span id="commuterTicketMonthMessage" class="message"></span></label>
-		<input type="text" id="commuterTicketMonth" name="commuterTicketMonth" size="6" maxlength="6" />
+		<label for="commuterTicketMonth">定期代年月（西暦6桁：YYYYMM）<span id="commuterTicketMonthMessage" class="message"></span></label>
+		<input type="text" id="commuterTicketMonth" name="commuterTicketMonth" size="11" maxlength="6" />
 	</div>
 	<div>
 		<label for="commuterTicketNo">定期代連番<span id="commuterTicketNoMessage" class="message"></span></label>
 		<input type="text" id="commuterTicketNo" name="commuterTicketNo" size="11" maxlength="11" />
 	</div>
 	<div>
- 		<label for="startDate">使用開始年月日（西暦8桁）<span id="startDateMessage" class="message"></span></label>
-		<input type="text" id="startDate" name="startDate" size="8" maxlength="8" />
+ 		<label for="startDate">使用開始年月日（西暦8桁：YYYYMMDD）<span id="startDateMessage" class="message"></span></label>
+		<input type="text" id="startDate" name="startDate" size="11" maxlength="8" />
 	</div>
 	<div>
 		<label for="lineName">路線名<span id="lineNameMessage" class="message"></span></label>
@@ -56,12 +56,12 @@ $(function() {
 
 <hr size="2" width="100%" align="left" ></hr>
 <h3>概要</h3>
-<p>　プロジェクトマスタ一覧画面、及び、プロジェクトマスタ入力画面よりプロジェクトマスタの管理（登録・更新・削除）を行う。</p>
+<p>　定期代申請画面、及び、定期代入力画面より定期代の登録・更新・削除を行う。</p>
 <br></br>
 
 <h3>項目定義</h3>
 <table border="1">
-	<caption>プロジェクトマスタ一覧画面</caption>
+	<caption>定期代申請画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
 	</tr>

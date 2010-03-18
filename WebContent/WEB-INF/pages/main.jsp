@@ -5,7 +5,7 @@
 	<li><a href="${t:url("/welcome/logout")}">ログアウト</a></li>
 </ul>
 <ul class="main-menu">
-	<li>個人別業務日報</li>
+	<li><a href="${t:url("/individual_business_report")}">個人別業務日報</a></li>
 	<li>月次締め処理</li>
 </ul>
 <ul class="main-menu">
