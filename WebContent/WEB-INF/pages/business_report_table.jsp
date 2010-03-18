@@ -28,7 +28,7 @@
 		</thead>
 		<tbody>
 	</c:if>
-			<tr>
+			<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 				<td><span id="businessReportDate${item.id}">
 				<fmt:formatDate value="${item.businessReportDate}" pattern="MM/dd(E)" /></span>
 				<input type="hidden" id="id${item.id}" value="${item.id}" /></td>
@@ -73,7 +73,7 @@
 		</thead>
 		<tbody>
 	</c:if>
-			<tr>
+			<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 				<td><fmt:formatDate value="${item.startDate}" pattern="yyyy/MM/dd(E)" /></td>
 				<td>${item.lineName}</td>
 				<td>${item.stationNameStart}</td>

@@ -22,7 +22,7 @@
 		</thead>
 	</c:if>
 		<tbody>
-			<tr>
+			<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 				<td><fmt:formatNumber value="${item.employee.employeeNo}" pattern="0000"/></td>
 				<td><a href="${t:url("/business_report")}">${item.employee.employeeName}</a></td>
 				<td>${item.employee.section.sectionName}</td>

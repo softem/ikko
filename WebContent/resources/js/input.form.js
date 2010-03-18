@@ -7,7 +7,6 @@ function randerTable(name) {
 	  	cache: false,
 	  	success: function(html){
 			$("#results").html('').append(html);
-			$('table.dataTable tr:even').css('background-color', '#eee');
 		}
 	});
 }
@@ -53,8 +52,6 @@ function InputForm(name) {
 InputForm.prototype = {
 
 	'init' : function() {
-		$('table.dataTable tr:even').css('background-color', '#eee');
-
 		$('#inputForm').ajaxComplete(function(event, XMLHttpRequest, options){
 			$('.formButton').removeAttr('disabled');
 		});

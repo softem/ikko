@@ -13,7 +13,7 @@
 			<th>操作</th>
 		</tr>
 	</c:if>
-		<tr>
+		<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 			<td id="id${item.id}">${item.id}</td>
 			<td>
 				<span><fmt:formatDate value="${item.commuterTicketMonth}" pattern="yyyy/MM"/></span>

@@ -23,7 +23,7 @@
 			<th>前日継続終了</th>
 		</tr>
 	</c:if>
-		<tr>
+		<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 			<td id="id${item.id}">${item.id}</td>
 			<td id="projectCode${item.id}">${item.projectCode}</td>
 			<td id="projectName${item.id}">${item.projectName}</td>

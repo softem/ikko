@@ -124,3 +124,7 @@ ime-mode:disabled;
 #results {
 clear:both;
 }
+
+.dataTable tr.odd td {
+background:#eee;
+}
