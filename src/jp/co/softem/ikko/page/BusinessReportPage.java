@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,12 @@ import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.AttendanceKind;
 import jp.co.softem.ikko.eis.BusinessReport;
 import jp.co.softem.ikko.eis.BusinessReportSummary;
+import jp.co.softem.ikko.eis.CommuterTicket;
 import jp.co.softem.ikko.eis.Project;
 import jp.co.softem.ikko.service.AttendanceKindService;
 import jp.co.softem.ikko.service.BusinessReportService;
 import jp.co.softem.ikko.service.BusinessReportSummaryService;
+import jp.co.softem.ikko.service.CommuterTicketService;
 import jp.co.softem.ikko.service.ProjectService;
 
 import org.t2framework.commons.annotation.core.Singleton;
@@ -101,6 +104,10 @@ public class BusinessReportPage extends BasePage {
 		return Forward.to("/WEB-INF/pages/business_report_table.jsp");
 	}
 
+	public Date getTitleDate() {
+		return cal.getCurrentCal().getTime();
+	}
+
 	public List<BusinessReport> getList() throws ParseException {
 		List<BusinessReport> list = new ArrayList<BusinessReport>();
 		Calendar start = Calendar.getInstance();
@@ -127,6 +134,13 @@ public class BusinessReportPage extends BasePage {
 
 	public List<BusinessReportSummary> getSummaryList() {
 		return businessReportSummaryService.findAll();
+	}
+
+	@EJB
+	CommuterTicketService commuterTicketServiceService;
+
+	public List<CommuterTicket> getCommuterTicketList() {
+		return commuterTicketServiceService.findAll(false);
 	}
 
 	@EJB
