@@ -8,7 +8,6 @@
 				<th rowspan="2">社員名</th>
 				<th rowspan="2">所属部署</th>
 				<th colspan="7">合計時間</th>
-				<th rowspan="2">月末締め</th>
 			</tr>
 			<tr>
 				<th>標準</th>
@@ -33,12 +32,6 @@
 				<td>${item.harfHolidayTimeSummary}</td>
 				<td>${item.legalHolidayWorkSummary}</td>
 				<td>${item.allOvertimeWorkSummary}</td>
-				<td>
-					<c:choose>
-						<c:when test="${item.monthlySeparateFlag}">済</c:when>
-						<c:otherwise>未</c:otherwise>
-					</c:choose>
-				</td>
 			</tr>
 		</tbody>
 	<c:if test="${status.last}">

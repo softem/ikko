@@ -13,7 +13,7 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import jp.co.softem.ikko.bean.CalendarBean;
+import jp.co.softem.ikko.bean.SessionItemBean;
 import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.AttendanceKind;
@@ -51,13 +51,13 @@ public class BusinessReportPage extends BasePage {
 	BusinessReportService service;
 
 	@Inject
-	CalendarBean cal;
+	SessionItemBean sessionItem;
 
 	@Default
 	@ActionPath("{year}/{month}")
 	public Navigation index(@Var("year") Integer year,
 			@Var("month") Integer month, Request request) {
-		cal.setCurrentCal(Calendar.getInstance());
+		sessionItem.setCurrentCal(Calendar.getInstance());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 		if (year == null || month == null) {
 			Calendar nextCal = Calendar.getInstance();
@@ -75,7 +75,7 @@ public class BusinessReportPage extends BasePage {
 			prevCal.set(year, month - 1, 1);
 			prevCal.add(Calendar.MONTH, -1);
 			request.setAttribute("prev", sdf.format(prevCal.getTime()));
-			cal.getCurrentCal().set(year, month - 1, 1);
+			sessionItem.getCurrentCal().set(year, month - 1, 1);
 		}
 		pageInfo.setPage("business_report");
 		return Forward.to(TEMPLATE);
@@ -105,13 +105,13 @@ public class BusinessReportPage extends BasePage {
 	}
 
 	public Date getTitleDate() {
-		return cal.getCurrentCal().getTime();
+		return sessionItem.getCurrentCal().getTime();
 	}
 
 	public List<BusinessReport> getList() throws ParseException {
 		List<BusinessReport> list = new ArrayList<BusinessReport>();
 		Calendar start = Calendar.getInstance();
-		start.setTime(cal.getCurrentCal().getTime());
+		start.setTime(sessionItem.getCurrentCal().getTime());
 		int max = start.getActualMaximum(Calendar.DATE);
 		start.set(Calendar.DATE, 20);
 		for (int i = 0; i < max; i++) {

@@ -11,7 +11,7 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import jp.co.softem.ikko.bean.CalendarBean;
+import jp.co.softem.ikko.bean.SessionItemBean;
 import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.eis.BusinessReportSummary;
 import jp.co.softem.ikko.service.BusinessReportSummaryService;
@@ -40,13 +40,13 @@ public class IndividualBusinessReportPage extends BasePage {
 	EmployeeService employeeService;
 
 	@Inject
-	CalendarBean cal;
+	SessionItemBean sessionItem;
 
 	@Default
 	@ActionPath("{year}/{month}")
 	public Navigation index(@Var("year") Integer year,
 			@Var("month") Integer month, Request request) {
-		cal.setCurrentCal(Calendar.getInstance());
+		sessionItem.setCurrentCal(Calendar.getInstance());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 		if (year == null || month == null) {
 			Calendar nextCal = Calendar.getInstance();
@@ -64,7 +64,7 @@ public class IndividualBusinessReportPage extends BasePage {
 			prevCal.set(year, month - 1, 1);
 			prevCal.add(Calendar.MONTH, -1);
 			request.setAttribute("prev", sdf.format(prevCal.getTime()));
-			cal.getCurrentCal().set(year, month - 1, 1);
+			sessionItem.getCurrentCal().set(year, month - 1, 1);
 		}
 		pageInfo.setPage("individual_business_report");
 		return Forward.to(TEMPLATE);
@@ -78,7 +78,7 @@ public class IndividualBusinessReportPage extends BasePage {
 	}
 
 	public Date getTitleDate() {
-		return cal.getCurrentCal().getTime();
+		return sessionItem.getCurrentCal().getTime();
 	}
 
 	public List<BusinessReportSummary> getList() throws ParseException {
@@ -93,7 +93,6 @@ public class IndividualBusinessReportPage extends BasePage {
 		report.setMidnightOvertimeWorkSummary(999.99);
 		report.setLegalHolidayWorkSummary(999.99);
 		report.setAllOvertimeWorkSummary(999.99);
-		report.setMonthlySeparateFlag(true);
 		list.add(report);
 		return list;
 	}
