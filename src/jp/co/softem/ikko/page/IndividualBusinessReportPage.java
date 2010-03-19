@@ -86,10 +86,8 @@ public class IndividualBusinessReportPage extends BasePage {
 
 		BusinessReportSummary report = new BusinessReportSummary();
 		report.setEmployee(employeeService.findById(1));
-		report.setStandardTimeSummary(999.99);
 		report.setActualWorkTime(999.99);
 		report.setOvertimeWorkSummary(999.99);
-		report.setHarfHolidayTimeSummary(999.99);
 		report.setMidnightOvertimeWorkSummary(999.99);
 		report.setLegalHolidayWorkSummary(999.99);
 		report.setAllOvertimeWorkSummary(999.99);
