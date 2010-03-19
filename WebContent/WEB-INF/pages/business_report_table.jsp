@@ -57,21 +57,45 @@
 
 <c:forEach var="item" items="${businessReportPage.summaryList}" varStatus="status">
 	<c:if test="${status.first}">
+	</c:if>
 	<table class="dataTable">
 		<caption>当月度合計</caption>
 		<tbody>
-	</c:if>
 			<tr>
-				<th class="odd">フレックス稼働日数</th>
+				<th class="odd">稼働日数</th>
+				<th class="odd">標準時間</th>
+				<th class="odd">非F稼働合計時間</th>
+				<th class="odd">非F残業合計時間</th>
+				<th class="odd">F稼働日数</th>
+				<th class="odd">F標準時間合計</th>
+				<th class="odd">F稼働合計時間</th>
+				<th class="odd">仮F稼働合計時間</th>
+				<th class="odd">F残業合計時間</th>
+			</tr>
+			<tr>
+				<td>${item.workSummaryDay}</td>
+				<td>${item.normalWorkTimeSummary}</td>
+				<td>${item.normalOvertimeWorkTimeSummary}</td>
+				<td>${item.standardTimeSummary}</td>
 				<td>${item.flexWorkSummaryDay}</td>
-			</tr>
-			<tr>
-				<th class="odd">仮フレックス稼働合計時間</th>
+				<td>${item.flexStandardTimeSummary}</td>
+				<td>${item.flexWorkTimeSummary}</td>
 				<td>${item.temporaryFlexTimeSummary}</td>
+				<td>${item.flexOvertimeWorkSummary}</td>
 			</tr>
-	<c:if test="${status.last}">
 		</tbody>
 	</table>
+	<table class="dataTable">
+		<tbody>
+			<tr>
+				<th class="odd">標準時間</th>
+			</tr>
+			<tr>
+				<td>${item.standardTimeSummary}</td>
+			</tr>
+		</tbody>
+	</table>
+	<c:if test="${status.last}">
 	</c:if>
 </c:forEach>
 
