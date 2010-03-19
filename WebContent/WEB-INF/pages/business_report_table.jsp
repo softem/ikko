@@ -55,6 +55,26 @@
 	</c:if>
 </c:forEach>
 
+<c:forEach var="item" items="${businessReportPage.summaryList}" varStatus="status">
+	<c:if test="${status.first}">
+	<table class="dataTable">
+		<caption>当月度合計</caption>
+		<tbody>
+	</c:if>
+			<tr>
+				<th class="odd">フレックス稼働日数</th>
+				<td>${item.flexWorkSummaryDay}</td>
+			</tr>
+			<tr>
+				<th class="odd">仮フレックス稼働合計時間</th>
+				<td>${item.temporaryFlexTimeSummary}</td>
+			</tr>
+	<c:if test="${status.last}">
+		</tbody>
+	</table>
+	</c:if>
+</c:forEach>
+
 <c:forEach var="item" items="${businessReportPage.commuterTicketList}" varStatus="status">
 	<c:if test="${status.first}">
 	<table class="dataTable">
@@ -74,7 +94,7 @@
 		<tbody>
 	</c:if>
 			<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
-				<td><fmt:formatDate value="${item.startDate}" pattern="yyyy/MM/dd(E)" /></td>
+				<td><fmt:formatDate value="${item.startDate}" pattern="yyyy/MM/dd" /></td>
 				<td>${item.lineName}</td>
 				<td>${item.stationNameStart}</td>
 				<td>${item.stationNameEnd}</td>
