@@ -34,10 +34,12 @@ import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.core.JsonResult;
 import jp.co.softem.ikko.eis.AttendanceKind;
 import jp.co.softem.ikko.eis.BusinessReport;
+import jp.co.softem.ikko.eis.BusinessReportProjectSummary;
 import jp.co.softem.ikko.eis.BusinessReportSummary;
 import jp.co.softem.ikko.eis.CommuterTicket;
 import jp.co.softem.ikko.eis.Project;
 import jp.co.softem.ikko.service.AttendanceKindService;
+import jp.co.softem.ikko.service.BusinessReportProjectSummaryService;
 import jp.co.softem.ikko.service.BusinessReportService;
 import jp.co.softem.ikko.service.BusinessReportSummaryService;
 import jp.co.softem.ikko.service.CommuterTicketService;
@@ -150,6 +152,13 @@ public class BusinessReportPage extends BasePage {
 
 	public List<BusinessReportSummary> getSummaryList() {
 		return businessReportSummaryService.findAll();
+	}
+
+	@EJB
+	BusinessReportProjectSummaryService businessReportProjectSummaryService;
+
+	public List<BusinessReportProjectSummary> getProjectSummaryList() {
+		return businessReportProjectSummaryService.findAll();
 	}
 
 	@EJB

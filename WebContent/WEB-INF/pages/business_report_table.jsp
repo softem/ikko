@@ -49,19 +49,20 @@
 				<td><span id="comment${item.id}">${item.comment}</span></td>
 				<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 			</tr>
-	<c:if test="${status.last}">				<td>${item.lateEarlyLeftOutSummary}</td>
-	
+	<c:if test="${status.last}">
 		</tbody>
 	</table>
 	</c:if>
 </c:forEach>
 
-<c:forEach var="item" items="${businessReportPage.summaryProjectList}" varStatus="status">
+<p><b>当月度合計</b></p>
+	<c:forEach var="item" items="${businessReportPage.projectSummaryList}" varStatus="status">
 	<c:if test="${status.first}">
 	<table class="dataTable">
-		<caption>当月度合計（プロジェクト単位）</caption>
+		<caption>プロジェクト単位合計</caption>
 		<thead>
 			<tr>
+				<th class="odd" rowspan="2">プロジェクト名</th>
 				<th class="odd" rowspan="2">標準時間</th>
 				<th class="odd" rowspan="2">半休取得時間</th>
 				<th class="odd" colspan="4">フレックス合計</th>
@@ -76,6 +77,7 @@
 		<tbody>
 	</c:if>
 			<tr>
+				<td>${item.project.projectName}</td>
 				<td>${item.standardTimeSummary}</td>
 				<td>${item.harfHolidayTimeSummary}</td>
 				<td>${item.flexWorkSummaryDay}</td>
@@ -93,7 +95,7 @@
 	<c:if test="${status.first}">
 	</c:if>
 	<table class="dataTable">
-		<caption>当月度合計（各種合計）</caption>
+		<caption>各種合計</caption>
 		<tbody>
 			<tr>
 				<th class="odd" rowspan="2">稼働日数</th>
@@ -125,7 +127,7 @@
 		</tbody>
 	</table>
 	<table class="dataTable">
-		<caption>当月度合計（各種勤怠区分回数）</caption>
+		<caption>各種勤怠区分回数</caption>
 		<tbody>
 			<tr>
 				<th class="odd">有休</th>
@@ -162,26 +164,26 @@
 		</tbody>
 	</table>
 	<table class="dataTable">
-		<caption>当月度合計（平日・土曜日稼働合計時間）</caption>
+		<caption>平日・土曜日稼働合計</caption>
 		<tbody>
 			<tr>
-				<th class="odd" colspan="3">平日稼働</th>
-				<th class="odd" colspan="3">土曜日稼働</th>
+				<th class="odd"></th>
+				<th class="odd">平日稼働</th>
+				<th class="odd">土曜日稼働</th>
 			</tr>
 			<tr>
 				<th class="odd">21日～末まで</th>
-				<th class="odd">1日～20日まで</th>
-				<th class="odd">合計</th>
-				<th class="odd">21日～末まで</th>
-				<th class="odd">1日～20日まで</th>
-				<th class="odd">合計</th>
-			</tr>
-			<tr>
 				<td>${item.firstHarfUsualWorkTimeSummary}</td>
-				<td>${item.latterHarfUsualWorkTimeSummary}</td>
-				<td>${item.usualWorkTimeSummary}</td>
 				<td>${item.firstHarfSaturdayWorkTimeSummary}</td>
+			</tr>
+			<tr>
+				<th class="odd">1日～20日まで</th>
+				<td>${item.latterHarfUsualWorkTimeSummary}</td>
 				<td>${item.latterHarfSaturdayWorkTimeSummary}</td>
+			</tr>
+			<tr>
+				<th class="odd">合計</th>
+				<td>${item.usualWorkTimeSummary}</td>
 				<td>${item.saturdayWorkTimeSummary}</td>
 			</tr>
 		</tbody>
