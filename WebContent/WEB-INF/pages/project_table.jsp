@@ -41,13 +41,8 @@
 			<td id="fixFinishTime${item.id}">${item.fixFinishTime}</td>
 			<td id="afterFixStartTime${item.id}">${item.afterFixStartTime}</td>
 			<td id="afterFixFinishTime${item.id}">${item.afterFixFinishTime}</td>
-			<td>
-				<c:choose>
-					<c:when test="${item.deleteFlag}">済</c:when>
-					<c:otherwise></c:otherwise>
-				</c:choose>
-				<input type="hidden" id="deleteFlag${item.id}" value="${item.deleteFlag}"/>
-			</td>
+			<td><span><fmt:formatDate value="${item.termValidStart}" pattern="yyyy/MM/dd"/></span></td>
+			<td><span><fmt:formatDate value="${item.termValidEnd}" pattern="yyyy/MM/dd"/></span></td>
 			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 		</tr>
 	<c:if test="${status.last}">
@@ -60,5 +55,7 @@
 	<input type="hidden" id="friday${item.id}" value="${item.friday}" />
 	<input type="hidden" id="saturday${item.id}" value="${item.saturday}" />
 	<input type="hidden" id="sunday${item.id}" value="${item.sunday}" />
+	<input type="hidden" id="termValidStart${item.id}" value="${item.termValidStart}" pattern="yyyyMMdd"/>">
+	<input type="hidden" id="termValidEnd${item.id}" value="${item.termValidEnd}" pattern="yyyyMMdd"/>">
 	</c:if>
 </c:forEach>

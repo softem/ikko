@@ -6,7 +6,9 @@
 </ul>
 <ul class="main-menu">
 	<li><a href="${t:url("/individual_business_report")}">個人別業務日報</a></li>
-	<li>月次締め処理</li>
+	<li>社内イベント</li>
+	<li>月末締め処理</li>
+	<li>年度締め処理</li>
 </ul>
 <ul class="main-menu">
 	<li><a href="${t:url("/section")}">部署マスタ</a></li>

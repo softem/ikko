@@ -79,8 +79,9 @@ $(function() {
 		<input type="text" id="afterFixFinishTime" name="afterFixFinishTime" size="6" maxlength="4" />
 	</div>
 	<div>
-		<input type="checkbox" id="deleteFlag" name="deleteFlag" value="true" />
-		<label style="display:inline;" for="deleteFlag">削除<span id="deleteFlagMessage" class="message"></span></label>
+		<label for="termValidStart">有効期間開始～終了<span id="termValidStartMessage" class="message"></span></label>
+		<input type="text" id="termValidStart" name="termValidStart" size="6" maxlength="4" />～
+		<input type="text" id="termValidEnd" name="termValidEnd" size="6" maxlength="4" />
 	</div>
 	<div style="text-align:right">
 		<input type="hidden" id="id" name="id" />

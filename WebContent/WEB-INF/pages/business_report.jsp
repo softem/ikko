@@ -7,6 +7,7 @@ $(function() {
 </script>
 
 <div id="local-menu">
+	<a href="${t:url("/individual_business_report")}">個人別業務日報へ移動</a>
 	<a href="/ikko/business_report/${prev}">前月へ移動</a>
 	<a href="${t:url("/business_report")}">当月に戻る</a>
 	<a href="/ikko/business_report/${next}">次月へ移動</a>
@@ -15,7 +16,7 @@ $(function() {
 
 <form id="inputForm" method="post" onsubmit="return false;">
 	<div>
-		<label for="project">プロジェクト <span id="projectMessage" class="message"></span></label>
+		<label for="project">プロジェクト<span id="projectMessage" class="message"></span></label>
 		<select id="project" name="project">
 		<c:forEach var="item" items="${businessReportPage.project}" varStatus="status">
 			<option value="${item.key}">${item.value}</option>
@@ -73,7 +74,7 @@ $(function() {
 		<td>2</td><td>一覧部</td><td>部署名</td><td>テキスト</td><td>O</td><td>40</td><td></td>
 	</tr>
 	<tr>
-		<td>3</td><td>一覧部</td><td>操作</td><td>ボタン</td><td>O</td><td>-</td>	<td></td>
+		<td>3</td><td>一覧部</td><td>操作</td><tcontentTyped>ボタン</td><td>O</td><td>-</td>	<td></td>
 	</tr>
 </table>
 <p>※ヘッダ部、フッタ部については、マスタの一覧・入力画面の共通仕様を参照。</p>

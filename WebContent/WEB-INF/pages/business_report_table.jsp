@@ -5,7 +5,7 @@
 		<thead>
 			<tr>
 				<th rowspan="2">日付</th>
-				<th rowspan="2">プロジェクト名</th>
+				<th rowspan="2">プロジェクトコード</th>
 				<th rowspan="2">区分</th>
 				<th colspan="2">勤務時間</th>
 				<th colspan="6">稼働</th>
@@ -32,7 +32,7 @@
 				<td><span id="businessReportDate${item.id}">
 				<fmt:formatDate value="${item.businessReportDate}" pattern="MM/dd(E)" /></span>
 				<input type="hidden" id="id${item.id}" value="${item.id}" /></td>
-				<td><span>${item.project.projectName}</span>
+				<td><span>${item.project.projectCode}</span>
 				<input type="hidden" id="project${item.id}" value="${item.project.id}" /></td>
 				<td><span>${item.attendanceKind.attendanceKindName}</span>
 				<input type="hidden" id="attendanceKind${item.id}" value="${item.attendanceKind.id}" /></td>
@@ -62,7 +62,7 @@
 		<caption>プロジェクト単位合計</caption>
 		<thead>
 			<tr>
-				<th class="odd" rowspan="2">プロジェクト名</th>
+				<th class="odd" rowspan="2">プロジェクトコード</th>
 				<th class="odd" rowspan="2">標準時間</th>
 				<th class="odd" rowspan="2">半休取得時間</th>
 				<th class="odd" colspan="4">フレックス合計</th>
@@ -77,7 +77,7 @@
 		<tbody>
 	</c:if>
 			<tr>
-				<td>${item.project.projectName}</td>
+				<td>${item.project.projectCode}</td>
 				<td>${item.standardTimeSummary}</td>
 				<td>${item.harfHolidayTimeSummary}</td>
 				<td>${item.flexWorkSummaryDay}</td>
@@ -164,12 +164,12 @@
 		</tbody>
 	</table>
 	<table class="dataTable">
-		<caption>平日・土曜日稼働合計</caption>
+		<caption>平日・土曜日残業合計</caption>
 		<tbody>
 			<tr>
 				<th class="odd"></th>
-				<th class="odd">平日稼働</th>
-				<th class="odd">土曜日稼働</th>
+				<th class="odd">平日残業</th>
+				<th class="odd">土曜日残業</th>
 			</tr>
 			<tr>
 				<th class="odd">21日～末まで</th>

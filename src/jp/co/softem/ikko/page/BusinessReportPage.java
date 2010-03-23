@@ -176,7 +176,7 @@ public class BusinessReportPage extends BasePage {
 		map.put(0, "");
 		List<Project> list = projectService.findAll();
 		for (Project project : list) {
-			map.put(project.getId(), project.getProjectName());
+			map.put(project.getId(), project.getProjectCode());
 		}
 		return map;
 	}

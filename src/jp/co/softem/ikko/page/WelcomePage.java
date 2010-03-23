@@ -29,6 +29,9 @@ public class WelcomePage extends BasePage {
 	@EJB
 	EmployeeService service;
 
+	@EJB
+	EmployeeService eventService;
+
 	@Default
 	public Navigation index() {
 		pageInfo.setPage("welcome");
@@ -41,13 +44,18 @@ public class WelcomePage extends BasePage {
 		req.setAttribute("employee", input);
 		String loginId = input.getLoginId();
 		String password = input.getPassword();
-		if (service.find(loginId, password) == null) {
+		Employee e = service.find(loginId, password);
+		if (e == null) {
 			pageInfo.setMessage("message.login.failed");
 			return index();
 		}
 		Logger logger = Logger.getLogger(WelcomePage.class);
 		logger.info(loginId + "," + password);
-		pageInfo.setPage("main");
+		
+//		if () {
+//		} else {
+//			pageInfo.setPage("main");
+//		}
 		return Forward.to(TEMPLATE);
 	}
 
