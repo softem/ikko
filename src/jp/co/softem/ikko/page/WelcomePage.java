@@ -6,6 +6,7 @@ import javax.inject.Named;
 import jp.co.softem.ikko.core.BasePage;
 import jp.co.softem.ikko.eis.Employee;
 import jp.co.softem.ikko.service.EmployeeService;
+import jp.co.softem.ikko.service.EventInfoService;
 
 import org.t2framework.commons.annotation.composite.RequestScope;
 import org.t2framework.commons.util.Logger;
@@ -30,7 +31,7 @@ public class WelcomePage extends BasePage {
 	EmployeeService service;
 
 	@EJB
-	EmployeeService eventService;
+	EventInfoService eventInfoService;
 
 	@Default
 	public Navigation index() {
@@ -52,10 +53,11 @@ public class WelcomePage extends BasePage {
 		Logger logger = Logger.getLogger(WelcomePage.class);
 		logger.info(loginId + "," + password);
 		
-//		if () {
-//		} else {
-//			pageInfo.setPage("main");
-//		}
+		if (eventInfoService.find(e.getId()) == null) {
+			pageInfo.setPage("event_attendance");
+		} else {
+			pageInfo.setPage("main");
+		}
 		return Forward.to(TEMPLATE);
 	}
 

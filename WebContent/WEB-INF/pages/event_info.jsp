@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript">
-var inputForm = new InputForm('section');
+var inputForm = new InputForm('event_info');
 $(function() {
 	inputForm.init();
 });
@@ -12,13 +12,29 @@ $(function() {
 
 <form id="inputForm" method="post" onsubmit="return false;">
 	<div>
-		<label for="sectionName">部署名 <span id="sectionNameMessage" class="message"></span></label>
-		<input type="text" id="sectionName" name="sectionName" size="42" maxlength="40" />
+		<label for="eventName">イベント名<span id="eventNameMessage" class="message"></span></label>
+		<input type="text" id="eventName" name="eventName" size="20" maxlength="20" >
 	</div>
 	<div>
-		<label style="text" for="termValidStart">有効期間開始～終了</label>
-		<input type="text" id="termValidStart" name="termValidStart" size="10" maxlength="8" /><span id="termValidStartMessage" class="message"></span>～
-		<input type="text" id="termValidEnd" name="termValidEnd" size="10" maxlength="8" /><span id="termValidEndMessage" class="message"></span>
+		<label for="eventDate">開催年月日<span id="eventDateMessage" class="message"></span></label>
+		<input type="text" id="eventDate" name="eventDate" size="10" maxlength="8" >
+	</div>
+	<div>
+		<label for="eventStart">イベント開始～終了時刻</label>
+		<input type="text" id="eventStart" name="eventStart" size="6" maxlength="4" /><span id="eventStartMessage" class="message"></span> ～
+		<input type="text" id="eventEnd" name="eventEnd" size="6" maxlength="4" /><span id="eventEndMessage" class="message"></span>
+	</div>
+	<div>
+		<label for="eventPlace">開催場所<span id="eventPlaceMessage" class="message"></span></label>
+		<input type="text" id="eventPlace" name="eventPlace" size="50" maxlength="40" >
+	</div>
+	<div>
+		<label for="eventComment">イベント内容<span id="eventCommentMessage" class="message"></span></label>
+		<input type="text" id="eventComment" name="eventComment" size="50" maxlength="100" >
+	</div>
+	<div>
+		<label for="eventCheckMonth">出欠席チェック年月（※出欠席確認の実施月度を指定）<span id="eventCheckMonthMessage" class="message"></span></label>
+		<input type="text" id="eventCheckMonth" name="eventCheckMonth" size="8" maxlength="6" >
 	</div>
 	<div style="text-align:right">
 		<input type="hidden" id="id" name="id" />
@@ -30,17 +46,17 @@ $(function() {
 <p><input type="button" id="addButton" class="editButton" value="新規登録" onclick="inputForm.showAddForm()" /></p>
 
 <div id="results">
-<jsp:include page="section_table.jsp"></jsp:include>
+<jsp:include page="event_info_table.jsp"></jsp:include>
 </div>
 
 <hr size="2" width="100%" align="left" ></hr>
 <h3>概要</h3>
-<p>　部署マスタ一覧画面、及び、部署マスタ入力画面より部署マスタの管理（登録・更新・削除）を行う。</p>
+<p>　部署一覧画面、及び、部署入力画面より部署マスタのデータの管理（登録・更新・削除）を行う。</p>
 <br></br>
 
 <h3>項目定義</h3>
 <table border="1">
-	<caption>部署マスタ一覧画面</caption>
+	<caption>部署一覧画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
 	</tr>
@@ -51,14 +67,14 @@ $(function() {
 		<td>2</td><td>一覧部</td><td>部署名</td><td>テキスト</td><td>O</td><td>40</td><td></td>
 	</tr>
 	<tr>
-		<td>3</td><td>一覧部</td><td>操作</td><td>ボタン</td><td>O</td><td>-</td>	<td></td>
+		<td>3</td><td>一覧部</td><td>操作</td><tcontentTyped>ボタン</td><td>O</td><td>-</td>	<td></td>
 	</tr>
 </table>
 <p>※ヘッダ部、フッタ部については、マスタの一覧・入力画面の共通仕様を参照。</p>
 <br></br>
 
 <table border="1">
-	<caption>部署マスタ入力画面</caption>
+	<caption>部署入力画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>Ｉ/Ｏ</th><th>桁数</th><th>備考</th>
 	</tr>

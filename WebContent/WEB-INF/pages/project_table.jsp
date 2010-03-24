@@ -11,7 +11,7 @@
 			<th rowspan="2">単位時間（分）</th>
 			<th colspan="2">定時間</th>
 			<th colspan="2">定時間後</th>
-			<th rowspan="2">削除</th>
+			<th colspan="2">有効期間</th>
 			<th rowspan="2">操作</th>
 		</tr>
 		<tr>
@@ -21,6 +21,8 @@
 			<th>終了</th>
 			<th>勤務開始</th>
 			<th>前日継続終了</th>
+			<th>開始</th>
+			<th>終了</th>
 		</tr>
 	</c:if>
 		<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
@@ -41,8 +43,9 @@
 			<td id="fixFinishTime${item.id}">${item.fixFinishTime}</td>
 			<td id="afterFixStartTime${item.id}">${item.afterFixStartTime}</td>
 			<td id="afterFixFinishTime${item.id}">${item.afterFixFinishTime}</td>
-			<td><span><fmt:formatDate value="${item.termValidStart}" pattern="yyyy/MM/dd"/></span></td>
-			<td><span><fmt:formatDate value="${item.termValidEnd}" pattern="yyyy/MM/dd"/></span></td>
+			
+			<td id="termValidStart${item.id}">${item.termValidStart}</td>
+			<td id="termValidEnd${item.id}">${item.termValidEnd}</td>
 			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 		</tr>
 	<c:if test="${status.last}">
@@ -55,7 +58,5 @@
 	<input type="hidden" id="friday${item.id}" value="${item.friday}" />
 	<input type="hidden" id="saturday${item.id}" value="${item.saturday}" />
 	<input type="hidden" id="sunday${item.id}" value="${item.sunday}" />
-	<input type="hidden" id="termValidStart${item.id}" value="${item.termValidStart}" pattern="yyyyMMdd"/>">
-	<input type="hidden" id="termValidEnd${item.id}" value="${item.termValidEnd}" pattern="yyyyMMdd"/>">
 	</c:if>
 </c:forEach>

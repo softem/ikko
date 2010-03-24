@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script language="javascript">
-var inputForm = new InputForm('project');
+var inputForm = new InputForm('event_attendance');
 $(function() {
 	inputForm.init();
 });
@@ -12,76 +12,11 @@ $(function() {
 
 <form id="inputForm" method="post" onsubmit="return false;">
 	<div>
-		<label for="projectCode">プロジェクトコード<span id="projectCodeMessage" class="message"></span></label>
-		<input type="text" id="projectCode" name="projectCode" size="35" maxlength="20"  style="margin-right:6px"/>
+		<label>イベント出欠席</label>
 	</div>
 	<div>
- 		<label for="projectName">プロジェクト名<span id="projectNameMessage" class="message"></span></label>
-		<input type="text" id="projectName" name="projectName" size="35" maxlength="20"  style="margin-right:6px"/>
-	</div>
-	<div>
-		<label for="workPlace">作業場所<span id="workPlaceMessage" class="message"></span></label>
-		<input type="text" id="workPlace" name="workPlace" size="35" maxlength="20" />
-	</div>
-	<div>
-		<input type="checkbox" id="flexFlag" name="flexFlag" value="true" />
-		<label style="display:inline;height:1.1em;" for="flexFlag">フレックス<span id="flexFlagMessage" class="message"></span></label>
-	</div>
-	<div style="float:left">
-		<label for="coreTimeStart">コアタイム開始～終了</label>
-		<input type="text" id="coreTimeStart" name="coreTimeStart" size="6" maxlength="4" /><span id="coreTimeStartMessage" class="message"></span>～
-		<input type="text" id="coreTimeFinish" name="coreTimeFinish" size="6" maxlength="4" /><span id="coreTimeFinishMessage" class="message"></span>
-	</div>
-	<div style="clear:both">
-		<label for="unitMinute">単位時間（分）<span id="unitMinuteMessage" class="message"></span></label>
-		<input type="text" id="unitMinute" name="unitMinute" size="2" maxlength="2" />
-	</div>
-	<div style="clear:both">
-		<label>出勤／休日指定</label>
-		<label>（0:出勤　1:その他休日　2:法定休日）</label>
-	</div>
-	<div style="float:left">
-		<label for="monday">月<span id="mondayMessage" class="message"></span></label>
-		<input type="text" id="monday" name="monday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div style="float:left">
-		<label for="tuesday">火<span id="tuesdayMessage" class="message"></span></label>
-		<input type="text" id="tuesday" name="tuesday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div style="float:left">
-		<label for="wednesday">水<span id="wednesdayMessage" class="message"></span></label>
-		<input type="text" id="wednesday" name="wednesday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div style="float:left">
-		<label for="thursday">木<span id="thursdayMessage" class="message"></span></label>
-		<input type="text" id="thursday" name="thursday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div style="float:left">
-		<label for="friday">金<span id="fridayMessage" class="message"></span></label>
-		<input type="text" id="friday" name="friday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div style="float:left">
-		<label for="saturday">土<span id="saturdayMessage" class="message"></span></label>
-		<input type="text" id="saturday" name="saturday" size="1" maxlength="1" style="margin-right:6px"/>
-	</div>
-	<div>
-		<label for="sunday">日<span id="sundayMessage" class="message"></span></label>
-		<input type="text" id="sunday" name="sunday" size="1" maxlength="1" />
-	</div>
-	<div style="clear:both">
-		<label for="fixStartTime">定時間開始～終了</label>
-		<input type="text" id="fixStartTime" name="fixStartTime" size="6" maxlength="4" /><span id="fixStartTimeMessage" class="message"></span>～
-		<input type="text" id="fixFinishTime" name="fixFinishTime" size="6" maxlength="4" /><span id="fixFinishTimeMessage" class="message"></span>
-	</div>
-	<div style="clear:both">
-		<label for="afterFixStartTime">定時間後勤務開始～前日継続終了</label>
-		<input type="text" id="afterFixStartTime" name="afterFixStartTime" size="6" maxlength="4" /><span id="afterFixStartTimeMessage" class="message"></span>～
-		<input type="text" id="afterFixFinishTime" name="afterFixFinishTime" size="6" maxlength="4" /><span id="afterFixFinishTimeMessage" class="message"></span>
-	</div>
-	<div>
-		<label for="termValidStart">有効期間開始～終了</label>
-		<input type="text" id="termValidStart" name="termValidStart" size="10" maxlength="8" /><span id="termValidStartMessage" class="message"></span>～
-		<input type="text" id="termValidEnd" name="termValidEnd" size="10" maxlength="8" /><span id="termValidEndMessage" class="message"></span>
+		<input type="checkbox" id="eventAttendanceFlag" name="eventAttendanceFlag" value="true" />
+		<label style="display:inline;height:1.1em;" for="eventAttendanceFlag">出席<span id="eventAttendanceFlagMessage" class="message"></span></label>
 	</div>
 	<div style="text-align:right">
 		<input type="hidden" id="id" name="id" />
@@ -90,21 +25,19 @@ $(function() {
 	</div>
 </form>
 
-<p><input type="button" id="addButton" class="editButton" value="新規登録" onclick="inputForm.showAddForm()" /></p>
-
 <div id="results">
-<jsp:include page="project_table.jsp"></jsp:include>
+<jsp:include page="event_attendance_table.jsp"></jsp:include>
 </div>
 
 
 <hr size="2" width="100%" align="left" ></hr>
 <h3>概要</h3>
-<p>　プロジェクトマスタ一覧画面、及び、プロジェクトマスタ入力画面よりプロジェクトマスタの管理（登録・更新・削除）を行う。</p>
+<p>　定期代申請画面、及び、定期代入力画面より定期代の登録・更新・削除を行う。</p>
 <br></br>
 
 <h3>項目定義</h3>
 <table border="1">
-	<caption>プロジェクトマスタ一覧画面</caption>
+	<caption>定期代申請画面</caption>
 	<tr bgcolor="#99ffff">
 		<th>No</th><th>表示部</th><th>項目名</th><th>タイプ</th><th>I/O</th><th>桁数</th><th>備考</th>
 	</tr>

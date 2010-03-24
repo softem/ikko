@@ -2,13 +2,14 @@
 <ul class="main-menu">
 	<li><a href="${t:url("/business_report")}">業務日報</a></li>
 	<li><a href="${t:url("/commuter_ticket")}">定期代申請</a></li>
+	<li><a href="${t:url("/event_attendance")}">イベント出欠席</a></li>
 	<li><a href="${t:url("/welcome/logout")}">ログアウト</a></li>
 </ul>
 <ul class="main-menu">
 	<li><a href="${t:url("/individual_business_report")}">個人別業務日報</a></li>
-	<li>社内イベント</li>
 	<li>月末締め処理</li>
 	<li>年度締め処理</li>
+	<li><a href="${t:url("/event_info")}">イベント情報</a></li>
 </ul>
 <ul class="main-menu">
 	<li><a href="${t:url("/section")}">部署マスタ</a></li>
