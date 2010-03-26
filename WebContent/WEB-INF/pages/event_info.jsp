@@ -30,7 +30,7 @@ $(function() {
 	</div>
 	<div>
 		<label for="eventComment">イベント内容<span id="eventCommentMessage" class="message"></span></label>
-		<input type="text" id="eventComment" name="eventComment" size="50" maxlength="100" >
+		<textarea id="eventComment" name="eventComment" rows="10" cols="49" ></textarea>
 	</div>
 	<div>
 		<label for="eventCheckMonth">出欠席チェック年月（※出欠席確認の実施月度を指定）<span id="eventCheckMonthMessage" class="message"></span></label>
@@ -48,6 +48,8 @@ $(function() {
 <div id="results">
 <jsp:include page="event_info_table.jsp"></jsp:include>
 </div>
+
+
 
 <hr size="2" width="100%" align="left" ></hr>
 <h3>概要</h3>

@@ -16,6 +16,9 @@
  */
 package jp.co.softem.ikko.service;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
@@ -23,6 +26,7 @@ import org.t2framework.t2.action.ErrorInfo;
 import org.t2framework.t2.annotation.core.Form;
 
 import jp.co.softem.ikko.core.JsonResult;
+import jp.co.softem.ikko.eis.Employee;
 import jp.co.softem.ikko.eis.EventInfo;
 import jp.co.softem.ikko.eis.Project;
 
@@ -37,8 +41,6 @@ public class EventInfoService extends BaseService<EventInfo, Integer> {
 	private static final long serialVersionUID = 1L;
 
 	private static final int MAX_RESULT = 200;
-
-	private Class<EventInfo> type;
 
 	public EventInfoService() {
 		super(EventInfo.class);
@@ -57,10 +59,10 @@ public class EventInfoService extends BaseService<EventInfo, Integer> {
 	 */
 	public EventInfo find(int employeeId) {
 		try {
-//			return (EventInfo) em
-//					.createQuery(
-//							"select e from event_info e, event_attendance ea where substr(e.eventCheckmonth,1,6) = substr(CURDATE() + 0,1,6) and e.Id = ea.eventId and ea.employeeId = :employeeId")
-//					.setParameter("employeeId", employeeId).getSingleResult();
+			// return (EventInfo) em
+			// .createQuery(
+			// "select e from event_info e, event_attendance ea where substr(e.eventCheckmonth,1,6) = substr(CURDATE() + 0,1,6) and e.Id = ea.eventId and ea.employeeId = :employeeId")
+			// .setParameter("employeeId", employeeId).getSingleResult();
 			EventInfo eventInfo = null;
 			return eventInfo;
 		} catch (NoResultException e) {
@@ -69,20 +71,30 @@ public class EventInfoService extends BaseService<EventInfo, Integer> {
 	}
 
 	/**
-	 * 当月分のイベントを返答します。
+	 * 適用日とそれ以降のイベントの情報を返答します。
 	 * 
 	 * <p>
 	 * 検索しても見つからない場合はnullを返答します。
 	 * </p>
-	 * 
-	 * @return 当月分のイベントデータ
+	 * @param eventApplyDate 適用日
+	 * @return イベントデータ
 	 */
-	public EventInfo findByEventCheckMonth() {
+	@SuppressWarnings("unchecked")
+	public List<EventInfo> findByApplyDate(Date eventApplyDate) {
 		try {
-			String sql = "select e from " + type.getSimpleName()
-			+ " e order by e.id";
-			return (EventInfo) em.createQuery(sql).setMaxResults(MAX_RESULT).getResultList();
-			
+			// String sql = "select e from "
+			// + type.getSimpleName()
+			// +
+			// " e left join e.eventAttendances as ea join ea.employee as em where e.eventApplyDate >= :eventApplyDate and em.id = :employeeId order by e.id desc";
+			// return em.createQuery(sql).setParameter("eventApplyDate",
+			// eventApplyDate).setParameter("employeeId", employeeId)
+			// .setMaxResults(MAX_RESULT).getResultList();
+			String sql = "select e from "
+					+ type.getSimpleName()
+					+ " e where e.eventApplyDate >= :eventApplyDate order by e.id";
+			return em.createQuery(sql).setParameter("eventApplyDate",
+					eventApplyDate).setMaxResults(MAX_RESULT).getResultList();
+
 		} catch (NoResultException e) {
 			return null;
 		}
@@ -91,6 +103,6 @@ public class EventInfoService extends BaseService<EventInfo, Integer> {
 	public JsonResult save(EventInfo eventInfo, ErrorInfo info) {
 		JsonResult result = new JsonResult();
 		return result;
-		
+
 	}
 }

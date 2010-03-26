@@ -39,7 +39,7 @@ public abstract class BaseService<T, PK extends Serializable> implements
 
 	private static final int MAX_RESULT = 200;
 
-	private Class<T> type;
+	protected Class<T> type;
 
 	@PersistenceContext(unitName = "ikko-jpa")
 	protected EntityManager em;

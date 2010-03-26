@@ -16,10 +16,14 @@
  */
 package jp.co.softem.ikko.service;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
 import jp.co.softem.ikko.eis.EventAttendance;
+import jp.co.softem.ikko.eis.EventInfo;
 
 /**
  * イベント出欠席用のDAOクラスです。
@@ -31,8 +35,32 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 
 	private static final long serialVersionUID = 1L;
 
+	private static final int MAX_RESULT = 200;
+
 	public EventAttendanceService() {
 		super(EventAttendance.class);
 	}
 
+	/**
+	 * 指定した社員IDのイベントの情報を返答します。
+	 * 
+	 * <p>
+	 * 検索しても見つからない場合はnullを返答します。
+	 * </p>
+	 * @param employeeId 社員ID
+	 * @return イベント出欠席
+	 */
+	@SuppressWarnings("unchecked")
+	public List<EventAttendance> findByEmployeeId(int employeeId) {
+		try {
+			String sql = "select e from "
+					+ type.getSimpleName()
+					+ " e join e.eventInfo ei join e.employee ep where ep.id = :employeeId order by ei.id";
+			return em.createQuery(sql).setParameter("employeeId",
+					employeeId).setMaxResults(MAX_RESULT).getResultList();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }

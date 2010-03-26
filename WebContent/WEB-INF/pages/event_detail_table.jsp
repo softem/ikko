@@ -1,18 +1,16 @@
-<c:forEach var="item" items="${eventAttendancePage.list}" varStatus="status">
+<c:forEach var="item" items="${eventDetailPage.List}" varStatus="status">
 	<c:if test="${status.first}">
 	<table class="dataTable">
 		<tr>
+			<th>社員No</th>
+			<th>社員名</th>
 			<th>出欠席</th>
-			<th>イベント名</th>
-			<th>開催年月日</th>
-			<th>開始時刻</th>
-			<th>終了時刻</th>
-			<th>開催場所</th>
-			<th>内容</th>
 			<th>操作</th>
 		</tr>
 	</c:if>
 		<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
+			<td id="employeeNo${item.id}">${item.employeeNo}</td>
+			<td id="employeeName${item.id}">${item.employeeName}</td>
 			<td>
 				<c:choose>
 					<c:when test="${item.eventAttendances[0].id == null}"><b>保留</b></c:when>
@@ -20,12 +18,6 @@
 					<c:otherwise>欠席</c:otherwise>
 				</c:choose>
 			</td>
-			<td id="eventName${item.id}">${item.eventName}</td>
-			<td><span><fmt:formatDate value="${item.eventDate}" pattern="yyyy/MM/dd"/></span></td>
-			<td id="eventStart${item.id}">${item.eventStart}</td>
-			<td id="eventEnd${item.id}">${item.eventEnd}</td>
-			<td id="eventPlace${item.id}">${item.eventPlace}</td>
-			<td id="eventComment${item.id}">${item.eventComment}</td>
 			<td>
 				<c:choose>
 					<c:when test="${item.eventAttendances[0].id == null}"><input type="button" class="editButton" value="出欠席入力" onclick="inputForm.showAddForm()" /></c:when>
@@ -35,7 +27,7 @@
 		</tr>
 	<c:if test="${status.last}">
 	</table>
-	<input type="hidden" id="id${item.id}" value="${item.id}"/>
+	<input type="hidden" id="id${item.id}" value="${item.eventAttendances[0].id}"/>
 	<input type="hidden" id="eventAttendanceFlag${item.id}" value="${item.eventAttendances[0].eventAttendanceFlag}"/>
 	</c:if>
 </c:forEach>

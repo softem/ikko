@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -87,16 +88,38 @@ public class EventAttendancePage extends BasePage {
 		return Forward.to("/WEB-INF/pages/event_attendance_table.jsp");
 	}
 
-	public List<EventAttendance> getList() {
-		List<EventAttendance> list = new ArrayList<EventAttendance>();
-		EventInfo eventInfo = eventInfoService.findById(1);
-		EventAttendance eventAttendance = eventAttendanceService.findById(eventInfo.getId());
-		if (eventAttendance == null) {
-			eventAttendance = new EventAttendance();
+	public List<EventInfo> getList() {
+		Calendar cal = Calendar.getInstance();
+		List<EventInfo> list = new ArrayList<EventInfo>();
+		List<EventInfo> infoList = eventInfoService.findByApplyDate(cal.getTime());
+		List<EventAttendance> attendanceList = eventAttendanceService.findByEmployeeId(2);
+
+		Iterator<EventInfo> it1 = infoList.iterator();
+		while (it1.hasNext()) {
+			EventInfo eventInfo = it1.next();
+			Iterator<EventAttendance> it2 = attendanceList.iterator();
+			eventInfo.setEventAttendances(new ArrayList<EventAttendance>());
+			while (it2.hasNext()) {
+				EventAttendance eventAttendance = it2.next();
+				if (eventInfo.getId() == eventAttendance.getEventInfo().getId()) {
+					List<EventAttendance> attendanceLt = new ArrayList<EventAttendance>();
+					attendanceLt.add(eventAttendance);
+					eventInfo.setEventAttendances(attendanceLt);
+					break;
+				}
+			}
+			list.add(eventInfo);
 		}
-		eventAttendance.setEventInfo(eventInfo);
-		list.add(eventAttendance);
+		
 		return list;
+//		List<EventInfo> list = new ArrayList<EventInfo>();
+//		EventInfo eventInfo = eventInfoService.findById(2);
+//		EventAttendance eventAttendance = eventAttendanceService.findById(2);
+//		List<EventAttendance> l = new ArrayList<EventAttendance>();
+//		l.add(eventAttendance);
+//		eventInfo.setEventAttendances(l);
+//		list.add(eventInfo);
+//		return list;
 	}
 
 	public EventAttendance getEventAttendance() {

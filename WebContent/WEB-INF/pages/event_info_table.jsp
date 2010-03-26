@@ -15,18 +15,18 @@
 	</c:if>
 		<tr<c:if test="${status.index mod 2 != 0}"> class="odd"</c:if>>
 			<td id="id${item.id}">${item.id}</td>
-			<td id="eventName${item.id}">${item.eventName}</td>
+			<td id="eventName${item.id}"><a href="${t:url("/event_detail")}">${item.eventName}</a></td>
 			<td><span><fmt:formatDate value="${item.eventDate}" pattern="yyyy/MM/dd"/></span></td>
 			<td id="eventStart${item.id}">${item.eventStart}</td>
 			<td id="eventEnd${item.id}">${item.eventEnd}</td>
 			<td id="eventPlace${item.id}">${item.eventPlace}</td>
-			<td><span><fmt:formatDate value="${item.eventCheckMonth}" pattern="yyyy/MM"/></span></td>
+			<td><span><fmt:formatDate value="${item.eventApplyDate}" pattern="yyyy/MM"/></span></td>
 			<td id="eventComment${item.id}">${item.eventComment}</td>
 			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
 		</tr>
 	<c:if test="${status.last}">
 	</table>
 	<input type="hidden" id="eventDate${item.id}" value="<fmt:formatDate value="${item.eventDate}" pattern="yyyyMMdd"/>">
-	<input type="hidden" id="eventCheckMonth${item.id}" value="<fmt:formatDate value="${item.eventCheckMonth}" pattern="yyyyMM"/>">
+	<input type="hidden" id="eventApplyDate${item.id}" value="<fmt:formatDate value="${item.eventApplyDate}" pattern="yyyyMM"/>">
 	</c:if>
 </c:forEach>
