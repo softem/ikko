@@ -35,6 +35,7 @@
 					<c:when test="${item.flexFlag}">有</c:when>
 					<c:otherwise>無</c:otherwise>
 				</c:choose>
+				<span><input type="hidden" id="flexFlag${item.id}" value="${item.flexFlag}"/></span>
 			</td>
 			<td id="coreTimeStart${item.id}">${item.coreTimeStart}</td>
 			<td id="coreTimeFinish${item.id}">${item.coreTimeFinish}</td>
@@ -46,17 +47,18 @@
 			
 			<td id="termValidStart${item.id}">${item.termValidStart}</td>
 			<td id="termValidEnd${item.id}">${item.termValidEnd}</td>
-			<td><input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" /></td>
+			<td>
+				<input type="button" class="editButton" value="編集" onclick="inputForm.showEditForm(${item.id})" />
+				<input type="hidden" id="monday${item.id}" value="${item.monday}" />
+				<input type="hidden" id="tuesday${item.id}" value="${item.tuesday}" />
+				<input type="hidden" id="wednesday${item.id}" value="${item.wednesday}" />
+				<input type="hidden" id="thursday${item.id}" value="${item.thursday}" />
+				<input type="hidden" id="friday${item.id}" value="${item.friday}" />
+				<input type="hidden" id="saturday${item.id}" value="${item.saturday}" />
+				<input type="hidden" id="sunday${item.id}" value="${item.sunday}" />
+			</td>
 		</tr>
 	<c:if test="${status.last}">
 	</table>
-	<input type="hidden" id="flexFlag${item.id}" value="${item.flexFlag}"/>
-	<input type="hidden" id="monday${item.id}" value="${item.monday}" />
-	<input type="hidden" id="tuesday${item.id}" value="${item.tuesday}" />
-	<input type="hidden" id="wednesday${item.id}" value="${item.wednesday}" />
-	<input type="hidden" id="thursday${item.id}" value="${item.thursday}" />
-	<input type="hidden" id="friday${item.id}" value="${item.friday}" />
-	<input type="hidden" id="saturday${item.id}" value="${item.saturday}" />
-	<input type="hidden" id="sunday${item.id}" value="${item.sunday}" />
 	</c:if>
 </c:forEach>

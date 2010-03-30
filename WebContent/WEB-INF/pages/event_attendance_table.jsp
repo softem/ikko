@@ -19,6 +19,8 @@
 					<c:when test="${item.eventAttendances[0].eventAttendanceFlag}">出席</c:when>
 					<c:otherwise>欠席</c:otherwise>
 				</c:choose>
+				<span><input type="hidden" id="id${item.id}" value="${item.id}"/></span>
+				<span><input type="hidden" id="eventAttendanceFlag${item.id}" value="${item.eventAttendances[0].eventAttendanceFlag}"/></span>
 			</td>
 			<td id="eventName${item.id}">${item.eventName}</td>
 			<td><span><fmt:formatDate value="${item.eventDate}" pattern="yyyy/MM/dd"/></span></td>
@@ -35,7 +37,5 @@
 		</tr>
 	<c:if test="${status.last}">
 	</table>
-	<input type="hidden" id="id${item.id}" value="${item.id}"/>
-	<input type="hidden" id="eventAttendanceFlag${item.id}" value="${item.eventAttendances[0].eventAttendanceFlag}"/>
 	</c:if>
 </c:forEach>

@@ -7,7 +7,7 @@ $(function() {
 </script>
 
 <div id="local-menu">
-	<a href="${t:url("/event_info")}">メインメニューへ戻る</a>
+	<a href="${t:url("/event_info")}">イベント情報へ戻る</a>
 	<a href="${t:url("/welcome/main")}">メインメニューへ戻る</a>
 </div>
 
@@ -16,7 +16,7 @@ $(function() {
 		<label>イベント出欠席</label>
 	</div>
 	<div>
-		<input type="checkbox" id="eventAttendanceFlag" name="eventAttendanceFlag" value="true" />
+		<input type="checkbox" id="eventAttendanceFlag" name="eventAttendanceFlag" value="true"/>
 		<label style="display:inline;height:1.1em;" for="eventAttendanceFlag">出席<span id="eventAttendanceFlagMessage" class="message"></span></label>
 	</div>
 	<div style="text-align:right">
@@ -27,7 +27,9 @@ $(function() {
 </form>
 
 <div id="results">
-<jsp:include page="event_detail_table.jsp"></jsp:include>
+<jsp:include page="event_detail_table.jsp">
+<jsp:param value="${targetEventId}" name="targetEventId"/>
+</jsp:include>
 </div>
 
 

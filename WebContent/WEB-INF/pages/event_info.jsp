@@ -33,8 +33,8 @@ $(function() {
 		<textarea id="eventComment" name="eventComment" rows="10" cols="49" ></textarea>
 	</div>
 	<div>
-		<label for="eventCheckMonth">出欠席チェック年月（※出欠席確認の実施月度を指定）<span id="eventCheckMonthMessage" class="message"></span></label>
-		<input type="text" id="eventCheckMonth" name="eventCheckMonth" size="8" maxlength="6" >
+		<label for="eventApplyDate">適用年月日（※出欠席確認の最終日を指定(通常開催年月日と同じ）<span id="eventApplyDateMessage" class="message"></span></label>
+		<input type="text" id="eventApplyDate" name="eventApplyDate" size="10" maxlength="8" >
 	</div>
 	<div style="text-align:right">
 		<input type="hidden" id="id" name="id" />

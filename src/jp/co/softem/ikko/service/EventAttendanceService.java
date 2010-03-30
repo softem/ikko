@@ -42,7 +42,7 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 	}
 
 	/**
-	 * 指定した社員IDのイベントの情報を返答します。
+	 * 指定した社員IDのイベント出欠席を返答します。
 	 * 
 	 * <p>
 	 * 検索しても見つからない場合はnullを返答します。
@@ -58,6 +58,29 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 					+ " e join e.eventInfo ei join e.employee ep where ep.id = :employeeId order by ei.id";
 			return em.createQuery(sql).setParameter("employeeId",
 					employeeId).setMaxResults(MAX_RESULT).getResultList();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 指定したイベントIDのイベント出欠席を返答します。
+	 * 
+	 * <p>
+	 * 検索しても見つからない場合はnullを返答します。
+	 * </p>
+	 * @param eventId イベントID
+	 * @return イベント出欠席
+	 */
+	@SuppressWarnings("unchecked")
+	public List<EventAttendance> findByEventId(int eventId) {
+		try {
+			String sql = "select e from "
+					+ type.getSimpleName()
+					+ " e join e.eventInfo ei join e.employee ep where ei.id = :eventId order by ep.id";
+			return em.createQuery(sql).setParameter("eventId",
+					eventId).setMaxResults(MAX_RESULT).getResultList();
 
 		} catch (NoResultException e) {
 			return null;
