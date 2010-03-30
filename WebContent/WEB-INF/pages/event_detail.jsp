@@ -28,7 +28,9 @@ $(function() {
 
 <div id="results">
 <jsp:include page="event_detail_table.jsp">
-<jsp:param value="${targetEventId}" name="targetEventId"/>
+<jsp:param value="${eventDetailList}" name="eventDetailList"/>
+<jsp:param value="${absenceCount}" name="absenceCount"/>
+<jsp:param value="${reserveCount}" name="reserveCount"/>
 </jsp:include>
 </div>
 

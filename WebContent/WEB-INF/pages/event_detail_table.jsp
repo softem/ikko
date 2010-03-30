@@ -1,5 +1,7 @@
-${targetEventId}
-<c:forEach var="item" items="${eventDetailPage.list(2)}" varStatus="status">
+${eventDetailList}
+${absenceCount}
+${reserveCount}
+<c:forEach var="item" items="${eventDetailList}" varStatus="status">
 	<c:if test="${status.first}">
 	<table class="dataTable">
 		<caption></caption>
@@ -33,9 +35,9 @@ ${targetEventId}
 		<tfoot>
 			<tr>
 				<th>欠席者数</th>
-				<td>${eventDetailPage.absenceCount}</td>
+				<td>${absenceCount}</td>
 				<th>保留者数</th>
-				<td>${eventDetailPage.reserveCount}</td>
+				<td>${reserveCount}</td>
 			</tr>
 		</tfoot>
 	</table>

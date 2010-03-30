@@ -25,7 +25,7 @@ $(function() {
 		<input type="text" id="eventEnd" name="eventEnd" size="6" maxlength="4" /><span id="eventEndMessage" class="message"></span>
 	</div>
 	<div>
-		<label for="eventPlace">開催場所<span id="eventPlaceMessage" class="message"></span></label>
+		<label for="eventPlace">開催場所<span id="eventPlarg0aceMessage" class="message"></span></label>
 		<input type="text" id="eventPlace" name="eventPlace" size="50" maxlength="40" >
 	</div>
 	<div>
@@ -46,7 +46,9 @@ $(function() {
 <p><input type="button" id="addButton" class="editButton" value="新規登録" onclick="inputForm.showAddForm()" /></p>
 
 <div id="results">
-<jsp:include page="event_info_table.jsp"></jsp:include>
+<jsp:include page="event_info_table.jsp">
+<jsp:param value="${eventInfoList}" name="eventInfoList"/>
+</jsp:include>
 </div>
 
 

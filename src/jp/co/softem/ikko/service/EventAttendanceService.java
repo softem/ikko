@@ -31,7 +31,8 @@ import jp.co.softem.ikko.eis.EventInfo;
  * @author suzuki
  */
 @Stateless
-public class EventAttendanceService extends BaseService<EventAttendance, Integer> {
+public class EventAttendanceService extends
+		BaseService<EventAttendance, Integer> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +48,9 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 	 * <p>
 	 * 検索しても見つからない場合はnullを返答します。
 	 * </p>
-	 * @param employeeId 社員ID
+	 * 
+	 * @param employeeId
+	 *            社員ID
 	 * @return イベント出欠席
 	 */
 	@SuppressWarnings("unchecked")
@@ -56,8 +59,8 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 			String sql = "select e from "
 					+ type.getSimpleName()
 					+ " e join e.eventInfo ei join e.employee ep where ep.id = :employeeId order by ei.id";
-			return em.createQuery(sql).setParameter("employeeId",
-					employeeId).setMaxResults(MAX_RESULT).getResultList();
+			return em.createQuery(sql).setParameter("employeeId", employeeId)
+					.setMaxResults(MAX_RESULT).getResultList();
 
 		} catch (NoResultException e) {
 			return null;
@@ -70,7 +73,9 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 	 * <p>
 	 * 検索しても見つからない場合はnullを返答します。
 	 * </p>
-	 * @param eventId イベントID
+	 * 
+	 * @param eventId
+	 *            イベントID
 	 * @return イベント出欠席
 	 */
 	@SuppressWarnings("unchecked")
@@ -79,11 +84,60 @@ public class EventAttendanceService extends BaseService<EventAttendance, Integer
 			String sql = "select e from "
 					+ type.getSimpleName()
 					+ " e join e.eventInfo ei join e.employee ep where ei.id = :eventId order by ep.id";
-			return em.createQuery(sql).setParameter("eventId",
-					eventId).setMaxResults(MAX_RESULT).getResultList();
+			return em.createQuery(sql).setParameter("eventId", eventId)
+					.setMaxResults(MAX_RESULT).getResultList();
 
 		} catch (NoResultException e) {
 			return null;
+		}
+	}
+
+	/**
+	 * 指定したイベントIDとイベント出欠席フラグに一致する件数を返答します。
+	 * 
+	 * <p>
+	 * 検索しても見つからない場合はnullを返答します。
+	 * </p>
+	 * 
+	 * @param eventId
+	 *            イベントID
+	 * @param eventAttedanceFlag
+	 *            イベント出欠席フラグ
+	 * @return イベント出欠席の件数
+	 */
+	@SuppressWarnings("unchecked")
+	public int findCountByEventId(int eventId, int eventAttendanceFlag) {
+		try {
+			String sql = "select count(e.ID) from event_attendance e where e.EVENT_ID = ? and e.EVENT_ATTENDANCE_FLAG = ?";
+			Integer count = (Integer) em.createNativeQuery(sql).setParameter(1,
+					eventId).setParameter(2, eventAttendanceFlag)
+					.getSingleResult();
+			return count.intValue();
+		} catch (NoResultException e) {
+			return 0;
+		}
+	}
+	
+	/**
+	 * 指定したイベントIDに一致する件数を返答します。
+	 * 
+	 * <p>
+	 * 検索しても見つからない場合はnullを返答します。
+	 * </p>
+	 * 
+	 * @param eventId
+	 *            イベントID
+	 * @return イベント出欠席の件数
+	 */
+	@SuppressWarnings("unchecked")
+	public int findCountByEventId(int eventId) {
+		try {
+			String sql = "select count(e.ID) from event_attendance e where e.EVENT_ID = ?";
+			Integer count = (Integer) em.createNativeQuery(sql).setParameter(1,
+					eventId).getSingleResult();
+			return count.intValue();
+		} catch (NoResultException e) {
+			return 0;
 		}
 	}
 }

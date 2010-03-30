@@ -23,6 +23,7 @@ import org.t2framework.t2.annotation.core.Ajax;
 import org.t2framework.t2.annotation.core.Default;
 import org.t2framework.t2.annotation.core.Form;
 import org.t2framework.t2.annotation.core.Page;
+import org.t2framework.t2.contexts.Request;
 import org.t2framework.t2.navigation.Forward;
 import org.t2framework.t2.navigation.Json;
 import org.t2framework.t2.spi.Navigation;
@@ -36,7 +37,9 @@ public class EventInfoPage extends BasePage {
 	EventInfoService service;
 
 	@Default
-	public Navigation index() {
+	public Navigation index(Request request) {
+		List<EventInfo> list = service.findAll();
+		request.setAttribute("eventInfoList", list);
 		pageInfo.setPage("event_info");
 		return Forward.to(TEMPLATE);
 	}
@@ -53,10 +56,6 @@ public class EventInfoPage extends BasePage {
 	@Ajax
 	public Navigation table() {
 		return Forward.to("/WEB-INF/pages/event_table.jsp");
-	}
-
-	public List<EventInfo> getList() {
-		return service.findAll();
 	}
 
 	public EventInfo getEventInfo() {

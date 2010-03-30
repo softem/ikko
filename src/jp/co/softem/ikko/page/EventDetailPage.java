@@ -68,14 +68,18 @@ public class EventDetailPage extends BasePage {
 	@Inject
 	SessionItemBean sessionItem;
 
-	int absenceCount = 0;
-	int reserveCount = 0;
-	int eventId = 0;
+//	int absenceCount = 0;
+//	int reserveCount = 0;
 
 	@Default
 	@ActionPath("{id}")
-	public Navigation index(@Var("id") String id, Request request) {
-		request.setAttribute("targetEventId", id);
+	public Navigation index(@Var("id") int id, Request request) {
+		List eventDetailList = employeeService.findByEventId(id);
+		int absenceCount = eventAttendanceService.findCountByEventId(id, 0);
+		int reserveCount = eventAttendanceService.findCountByEventId(id);
+		request.setAttribute("eventDetailList", eventDetailList);
+		request.setAttribute("absenceCount", absenceCount);
+		request.setAttribute("reserveCount", reserveCount);
 		pageInfo.setPage("event_detail");
 		return Forward.to(TEMPLATE);
 	}
@@ -114,7 +118,7 @@ public class EventDetailPage extends BasePage {
 					attendanceLt.add(eventAttendance);
 					employee.setEventAttendances(attendanceLt);
 					if (!eventAttendance.getEventAttendanceFlag()) {
-						absenceCount++;
+//						absenceCount++;
 					}
 					isDataExisits = true;
 					break;
@@ -122,35 +126,35 @@ public class EventDetailPage extends BasePage {
 			}
 			list.add(employee);
 			if (!isDataExisits) {
-				reserveCount++;
+//				reserveCount++;
 			}
 		}
 		return list;
 	}
 
-	public int getEventId() {
-		return eventId;
-	}
-	
-	public int setEventId(int id) {
-		return eventId = id;
-	}
-	
-	public int getAbsenceCount() {
-		return absenceCount;
-	}
-	
-	public int setAbsenceCount(int count) {
-		return absenceCount = count;
-	}
-	
-	public int getReserveCount() {
-		return reserveCount;
-	}
-	
-	public int setReserveCount(int count) {
-		return reserveCount = count;
-	}
+//	public int getEventId() {
+//		return eventId;
+//	}
+//	
+//	public int setEventId(int id) {
+//		return eventId = id;
+//	}
+//	
+//	public int getAbsenceCount() {
+//		return absenceCount;
+//	}
+//	
+//	public int setAbsenceCount(int count) {
+//		return absenceCount = count;
+//	}
+//	
+//	public int getReserveCount() {
+//		return reserveCount;
+//	}
+//	
+//	public int setReserveCount(int count) {
+//		return reserveCount = count;
+//	}
 	
 //	@SuppressWarnings("unchecked")
 //	public Map getCount() {

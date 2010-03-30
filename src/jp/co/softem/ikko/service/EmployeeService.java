@@ -16,6 +16,8 @@
  */
 package jp.co.softem.ikko.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 
@@ -60,4 +62,23 @@ public class EmployeeService extends BaseService<Employee, Integer> {
 		}
 	}
 
+	/**
+	 * 社員IDと指定したイベントIDと一致する情報を返答します。
+	 * イベント出欠席マスタにデータがない場合は、社員マスタの情報のみ返答します。
+	 * <p>
+	 * 検索しても見つからない場合はnullを返答します。
+	 * </p>
+	 * 
+	 * @param eventId
+	 *            イベントID
+	 * @return 社員No、社員名、イベント出欠席フラグ、イベント出欠席のID
+	 */
+	public List findByEventId(int eventId) {
+		try {
+			String sql = "select em.EMPOLYEE_NO, em.EMPOLYEE_NAME, ea.EVENT_ATTENDANCE_FLAG, ea.ID from employee em left outer join event_attendance ea where em.ID = ea.EMPLOYEE_ID and ea.EVENT_ID = ?";
+			return em.createNativeQuery(sql).setParameter(1, eventId).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }

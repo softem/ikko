@@ -1,4 +1,4 @@
-<c:forEach var="item" items="${eventInfoPage.list}" varStatus="status">
+<c:forEach var="item" items="${eventInfoList}" varStatus="status">
 	<c:if test="${status.first}">
 	<table class="dataTable">
 		<tr>

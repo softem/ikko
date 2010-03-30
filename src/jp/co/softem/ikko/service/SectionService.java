@@ -39,7 +39,7 @@ public class SectionService extends BaseService<Section, Integer> {
 	@SuppressWarnings("unchecked")
 	public List<Section> listBySectionName(String sectionName) {
 		return em.createQuery(
-				"select e from Section e where e.sectionName = :sectionName and e.deleteFlag = 0")
+				"select e from Section e where e.sectionName = :sectionName")
 				.setParameter("sectionName", sectionName).getResultList();
 	}
 
@@ -47,7 +47,7 @@ public class SectionService extends BaseService<Section, Integer> {
 	public List<Section> listBySectionName(int id, String sectionName) {
 		return em
 				.createQuery(
-						"select e from Section e where e.id <> :id and e.sectionName = :sectionName and e.deleteFlag = 0")
+						"select e from Section e where e.id <> :id and e.sectionName = :sectionName")
 				.setParameter("id", id)
 				.setParameter("sectionName", sectionName).getResultList();
 	}
